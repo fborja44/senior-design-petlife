@@ -319,7 +319,7 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &175182927
@@ -453,8 +453,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Next Page
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
-  m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
+  m_sharedMaterial: {fileID: 2214507739467897126, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_text: In the Washroom, you can bathe and  groom your pet! Come to this room the
     hygiene bar gets too low.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &273948561
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_text: Use your mouse to move the cursor and click to open menus and select an
     action
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -898,7 +898,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &427805644
@@ -1741,7 +1741,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Prev Page
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1805,7 +1805,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1003331217
@@ -2016,8 +2016,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Page 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
-  m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
+  m_sharedMaterial: {fileID: 2214507739467897126, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2286,8 +2286,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: How To Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
-  m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
+  m_sharedMaterial: {fileID: 2214507739467897126, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2531,8 +2531,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back To Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
-  m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
+  m_sharedMaterial: {fileID: 2214507739467897126, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2702,8 +2702,8 @@ MonoBehaviour:
   m_text: Gain points by taking care of your pet! Keep each status bar green by performing
     action like taking them out for a walk or feeding them!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
-  m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
+  m_sharedMaterial: {fileID: 2214507739467897126, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2839,7 +2839,7 @@ MonoBehaviour:
     and
     playing will drain the Energy of your pet.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2903,7 +2903,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1757129298
@@ -2974,7 +2974,7 @@ MonoBehaviour:
   m_text: You can open the Action Menu to choose what action you want to take to
     take care of your pet based on what room you are in.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3038,7 +3038,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1808603476

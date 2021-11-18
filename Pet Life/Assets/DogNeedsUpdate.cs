@@ -29,4 +29,29 @@ public class DogNeedsUpdate : MonoBehaviour
         currentEnergy -= energyLost;
         energyBar.SetNeeds(currentEnergy);
     }
+
+    public void Sit(){
+        int energyUsed = (int)(maxEnergy * 0.05);
+        LoseEnergy(energyUsed);
+    }
+
+    public void Lay(){
+        int energyUsed = (int)(maxEnergy * 0.05);
+        LoseEnergy(energyUsed);
+    }
+
+    public void Roll(){
+        int energyUsed = (int)(maxEnergy * 0.08);
+        LoseEnergy(energyUsed);
+    }
+
+    public void Fetch(){
+        int energyUsed = (int)(maxEnergy * 0.15);
+        LoseEnergy(energyUsed);
+    }
+
+    public void Speak(){
+        int energyUsed = (int)(maxEnergy * 0.06);
+        LoseEnergy(energyUsed);
+    }
 }

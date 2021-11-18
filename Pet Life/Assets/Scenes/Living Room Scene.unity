@@ -2924,9 +2924,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0029e7fcfe1e5544dbc234f1ce0c99bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnergy: 500
+  max: 500
   currentEnergy: 0
+  currentHunger: 0
+  currentThirst: 0
+  currentLove: 0
+  currentBladder: 0
+  currentHygiene: 0
   energyBar: {fileID: 31340221}
+  hungerBar: {fileID: 1646152740}
+  thirstBar: {fileID: 540597846}
+  loveBar: {fileID: 1907875328}
+  bladderBar: {fileID: 284880619}
+  hygieneBar: {fileID: 1418129276}
 --- !u!4 &1263834128
 Transform:
   m_ObjectHideFlags: 0

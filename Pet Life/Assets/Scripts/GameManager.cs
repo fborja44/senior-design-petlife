@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject PlayerPet;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // Changes scene to title screen
+    public void ToTitle() {
+        SceneManager.LoadScene("Title Scene");
     }
 }

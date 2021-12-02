@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -49,10 +48,5 @@ public class TutorialManager : MonoBehaviour
         } else {
             nextButton.gameObject.SetActive(true);
         }
-    }
-
-    // Changes scene to title screen
-    public void ToTitle() {
-        SceneManager.LoadScene("Title Scene");
     }
 }

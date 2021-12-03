@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class DogNeedsUpdate : MonoBehaviour
 {
+    private GameManager gameManager;
+    private Text needsName;
     public int max = 500;
     public int currentEnergy;
     public int currentHunger;
@@ -21,6 +24,16 @@ public class DogNeedsUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        // Set name
+        needsName = GameObject.Find("Needs Name").GetComponent<Text>();
+        string name = gameManager.petName;
+        if (name.EndsWith("S") || name.EndsWith("s")) {
+            needsName.text = name + "' Needs";
+        } else {
+            needsName.text = name + "'s Needs";
+        }
+
         currentEnergy = max;
         currentHunger = max; 
         currentThirst = max;

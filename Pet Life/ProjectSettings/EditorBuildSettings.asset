@@ -8,10 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title Scene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gameplay Scene.unity
     guid: 0268c79f36d0af944ab17742ddaefab3
   - enabled: 1
     path: Assets/Scenes/Tutorial Scene.unity
     guid: cc0c202b4b2d60e41af908eda211e227
+  - enabled: 1
+    path: Assets/Scenes/Pet Selection Scene.unity
+    guid: 5d123f1cc0029e4419dce85b7bbaf47f
+  - enabled: 1
+    path: Assets/Scenes/Living Room Scene.unity
+    guid: 53652068dc5c35443b48ccfa8b29320f
   m_configObjects: {}

@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SelectPet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private GameManager gameManager;
+    public GameObject inputField;
+    public GameObject errorText;
     public GameObject pet;
     public int petIndex;
     public Image selection;
@@ -23,7 +27,10 @@ public class SelectPet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     // Update is called once per frame
     void Update()
     {
-        
+        string nameText = inputField.GetComponent<TMP_InputField>().text;
+        if (nameText.Trim().Length != 0) {
+            errorText.SetActive(false);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -37,13 +44,23 @@ public class SelectPet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
 
     public void OnMouseDown() {
-        // Update the player's pet sprite
-        Debug.Log("Clicked " + petIndex);
+        string nameText = inputField.GetComponent<TMP_InputField>().text;
+        Debug.Log(nameText);
+        // Check if name was provided
+        if (!string.IsNullOrEmpty(nameText.Trim())) {
+            // Update player's pet name
+            gameManager.petName = nameText;
 
-        // Set Pet GameObject in GameManager
-        // TODO
+            // Update the player's pet sprite
+            // Debug.Log("Clicked " + petIndex);
 
-        // Change scene to gameplay
-        // TODO
+            // Set Pet GameObject in GameManager
+            gameManager.playerPet = pet;
+
+            // Change scene to gameplay
+            SceneManager.LoadScene("Living Room Scene");
+        } else {
+            errorText.SetActive(true);
+        }
     }
 }

@@ -27,7 +27,7 @@ public class DogNeedsUpdate : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         // Set name
         needsName = GameObject.Find("Needs Name").GetComponent<Text>();
-        string name = gameManager.petName;
+        string name = GameManager.petName;
         if (name.EndsWith("S") || name.EndsWith("s")) {
             needsName.text = name + "' Needs";
         } else {

@@ -49,13 +49,13 @@ public class SelectPet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         // Check if name was provided
         if (!string.IsNullOrEmpty(nameText.Trim())) {
             // Update player's pet name
-            gameManager.petName = nameText;
+            GameManager.petName = nameText;
 
             // Update the player's pet sprite
             // Debug.Log("Clicked " + petIndex);
 
             // Set Pet GameObject in GameManager
-            gameManager.playerPet = pet;
+            GameManager.playerPet = pet;
 
             // Change scene to gameplay
             SceneManager.LoadScene("Living Room Scene");

@@ -94,7 +94,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     void GainThirst(int thirstGain) {
         currentThirst += thirstGain;
-        thirstBar.SetNeeds(thirstHunger);
+        thirstBar.SetNeeds(thirstGain);
     }
 
     void GainHygiene(int hygieneGain) {

@@ -90,11 +90,35 @@ public class DogNeedsUpdate : MonoBehaviour
         hygieneBar.SetNeeds(currentHygiene);
     }
 
+    void GainEnergy(int sleep) {
+        currentEnergy += sleep;
+        energyBar.SetNeeds(currentEnergy);
+    }
+
     void GainBladder(int bladderGain){
         currentBladder += bladderGain;
         bladderBar.SetNeeds(currentBladder);
     }
 
+    void GainHunger(int hungerGain) {
+        currentHunger +=hungerGain;
+        hungerBar.SetNeeds(currentHunger);
+    }
+
+    void GainThirst(int thirstGain) {
+        currentThirst += thirstGain;
+        thirstBar.SetNeeds(thirstGain);
+    }
+
+    void GainHygiene(int hygieneGain) {
+        currentHygiene += hygieneGain;
+        hygieneBar.SetNeeds(currentHygiene);
+    }
+
+    void GainLove(int loveGain){
+        currentLove -= loveGain;
+        loveBar.SetNeeds(currentLove);
+    }
 
     public void Sit(){
         int energyUsed = (int)(max * 0.05);

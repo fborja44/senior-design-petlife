@@ -4124,8 +4124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05db40428249d741a660c597613a926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPet: {fileID: 0}
-  petName: Dog
+  defaultPet: {fileID: 4717599311788538371, guid: 20d8fb2eae9dd4deaad35ced93a88c2c, type: 3}
+  petPrefabs: []
 --- !u!4 &1891821592
 Transform:
   m_ObjectHideFlags: 0

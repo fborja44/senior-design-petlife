@@ -51,9 +51,6 @@ public class SelectPet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             // Update player's pet name
             GameManager.petName = nameText;
 
-            // Update the player's pet sprite
-            // Debug.Log("Clicked " + petIndex);
-
             // Set Pet GameObject in GameManager
             GameManager.playerPet = pet;
 

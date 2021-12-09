@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05db40428249d741a660c597613a926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultPet: {fileID: 0}
+  petPrefabs: []
 --- !u!4 &204306440
 Transform:
   m_ObjectHideFlags: 0
@@ -555,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -43.1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -621,7 +623,7 @@ MonoBehaviour:
   m_text: Start Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
-  m_sharedMaterial: {fileID: 7379807124729588738, guid: 14feeab8ffff9a441b398e209abd08a9, type: 2}
+  m_sharedMaterial: {fileID: 2214507739467897126, guid: e74d7b4bd2091484b832f3a7d21cd6fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

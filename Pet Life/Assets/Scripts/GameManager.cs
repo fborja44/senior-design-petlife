@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject PlayerPet;
-    public GameManager gameManager;
+    public static GameObject playerPet;
+    public static string petName = "Dog";
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {

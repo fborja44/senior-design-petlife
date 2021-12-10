@@ -1283,6 +1283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Training Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 2990223444455041474, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041477, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

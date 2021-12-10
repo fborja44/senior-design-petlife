@@ -60,6 +60,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseEnergy(1);
             LoseHunger(1);
             LoseThirst(2);
+            LoseHygiene(1);
         }
     }
 
@@ -152,5 +153,10 @@ public class DogNeedsUpdate : MonoBehaviour
     public void Speak(){
         float energyUsed = (float)(max * 0.06);
         LoseEnergy(energyUsed);
+    }
+
+    public void TakeBath() {
+        float hygieneGained = (float)(max * 0.5);
+        GainHygiene(hygieneGained);
     }
 }

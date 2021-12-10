@@ -1204,9 +1204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bcfab968c13d64aa1b49efcda3889d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LivingRoom: {fileID: 0}
-  Outside: {fileID: 0}
-  Bathroom: {fileID: 0}
 --- !u!4 &1142975495
 Transform:
   m_ObjectHideFlags: 0
@@ -1794,6 +1791,10 @@ PrefabInstance:
     - target: {fileID: 2990223444455041474, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_Name
       value: Training Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990223444455041474, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041477, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_Pivot.x

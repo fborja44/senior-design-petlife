@@ -7,24 +7,27 @@ public class DogNeedsUpdate : MonoBehaviour
 {
     private GameManager gameManager;
     private Text needsName;
-    public int max = 500;
-    public int currentEnergy;
-    public int currentHunger;
-    public int currentThirst;
-    public int currentLove;
-    public int currentBladder;
-    public int currentHygiene;
+    private float difficulty;
+    public float max = 500;
+    public float currentEnergy;
+    public float currentHunger;
+    public float currentThirst;
+    public float currentLove;
+    public float currentBladder;
+    public float currentHygiene;
     public NeedsBar energyBar;
     public NeedsBar hungerBar;
     public NeedsBar thirstBar;
     public NeedsBar loveBar;
     public NeedsBar bladderBar;
     public NeedsBar hygieneBar;
-    int count = 0;
+    float count = 0;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        // Set difficulty
+        difficulty = GameManager.difficulty;
         // Set name
         needsName = GameObject.Find("Needs Name").GetComponent<Text>();
         string name = GameManager.petName;
@@ -60,94 +63,94 @@ public class DogNeedsUpdate : MonoBehaviour
         }
     }
 
-    void LoseEnergy(int energyLost){
-        currentEnergy -= energyLost;
+    void LoseEnergy(float energyLost){
+        currentEnergy -= energyLost * difficulty;
         energyBar.SetNeeds(currentEnergy);
     }
 
-    void LoseHunger(int hungerLost){
-        currentHunger -= hungerLost;
+    void LoseHunger(float hungerLost){
+        currentHunger -= hungerLost * difficulty;
         hungerBar.SetNeeds(currentHunger);
     }
 
-    void LoseThirst(int thirstLost){
-        currentThirst -= thirstLost;
+    void LoseThirst(float thirstLost){
+        currentThirst -= thirstLost * difficulty;
         thirstBar.SetNeeds(currentThirst);
     }
 
-    void LoseLove(int loveLost){
-        currentLove -= loveLost;
+    void LoseLove(float loveLost){
+        currentLove -= loveLost * difficulty;
         loveBar.SetNeeds(currentLove);
     }
 
-    void LoseBladder(int bladderLost){
-        currentBladder -= bladderLost;
+    void LoseBladder(float bladderLost){
+        currentBladder -= bladderLost * difficulty;
         bladderBar.SetNeeds(currentBladder);
     }
 
-    void LoseHygiene(int hygieneLost){
-        currentHygiene -= hygieneLost;
+    void LoseHygiene(float hygieneLost){
+        currentHygiene -= hygieneLost * difficulty;
         hygieneBar.SetNeeds(currentHygiene);
     }
 
-    void GainEnergy(int sleep) {
+    void GainEnergy(float sleep) {
         currentEnergy += sleep;
         energyBar.SetNeeds(currentEnergy);
     }
 
-    void GainBladder(int bladderGain){
+    void GainBladder(float bladderGain){
         currentBladder += bladderGain;
         bladderBar.SetNeeds(currentBladder);
     }
 
-    void GainHunger(int hungerGain) {
+    void GainHunger(float hungerGain) {
         currentHunger +=hungerGain;
         hungerBar.SetNeeds(currentHunger);
     }
 
-    void GainThirst(int thirstGain) {
+    void GainThirst(float thirstGain) {
         currentThirst += thirstGain;
         thirstBar.SetNeeds(thirstGain);
     }
 
-    void GainHygiene(int hygieneGain) {
+    void GainHygiene(float hygieneGain) {
         currentHygiene += hygieneGain;
         hygieneBar.SetNeeds(currentHygiene);
     }
 
-    void GainLove(int loveGain){
+    void GainLove(float loveGain){
         currentLove -= loveGain;
         loveBar.SetNeeds(currentLove);
     }
 
     public void Sit(){
-        int energyUsed = (int)(max * 0.05);
+        float energyUsed = (float)(max * 0.05);
         LoseEnergy(energyUsed);
-        int hygieneUsed = (int)(max * 0.05);
+        float hygieneUsed = (float)(max * 0.05);
         LoseHygiene(hygieneUsed);
     }
 
     public void Lay(){
-        int energyUsed = (int)(max * 0.05);
+        float energyUsed = (float)(max * 0.05);
         LoseEnergy(energyUsed);
-        int hygieneUsed = (int)(max * 0.1);
+        float hygieneUsed = (float)(max * 0.1);
         LoseHygiene(hygieneUsed);
     }
 
     public void Roll(){
-        int energyUsed = (int)(max * 0.08);
+        float energyUsed = (float)(max * 0.08);
         LoseEnergy(energyUsed);
-        int hygieneUsed = (int)(max * 0.2);
+        float hygieneUsed = (float)(max * 0.2);
         LoseHygiene(hygieneUsed);
     }
 
     public void Fetch(){
-        int energyUsed = (int)(max * 0.15);
+        float energyUsed = (float)(max * 0.15);
         LoseEnergy(energyUsed);
     }
 
     public void Speak(){
-        int energyUsed = (int)(max * 0.06);
+        float energyUsed = (float)(max * 0.06);
         LoseEnergy(energyUsed);
     }
 }

@@ -12,7 +12,7 @@ public class NeedsBar : MonoBehaviour
 	public Gradient gradient;
 	public Image fill;
 
-	public void SetMaxNeeds(int Needs)
+	public void SetMaxNeeds(float Needs)
 	{
 		slider.maxValue = Needs;
 		slider.value = Needs;
@@ -20,7 +20,7 @@ public class NeedsBar : MonoBehaviour
 		fill.color = gradient.Evaluate(1f);
 	}
 
-    public void SetNeeds(int Needs)
+    public void SetNeeds(float Needs)
 	{
 		slider.value = Needs;
 

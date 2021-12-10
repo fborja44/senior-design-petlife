@@ -13,4 +13,18 @@ public class sceneChange : MonoBehaviour
     {
         SceneManager.LoadScene("Tutorial Scene");
     }
+    public void toOutside()
+    {
+        SceneManager.LoadScene("Outside Scene");
+    }
+
+    public void toBathroom()
+    {
+        SceneManager.LoadScene("Bathroom");
+    }
+
+    public void toLivingRoom()
+    {
+        SceneManager.LoadScene("Living Room Scene");
+    }
 }

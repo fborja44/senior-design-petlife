@@ -9,12 +9,12 @@ public class DogNeedsUpdate : MonoBehaviour
     private Text needsName;
     private float difficulty;
     public float max = 500;
-    public float currentEnergy;
-    public float currentHunger;
-    public float currentThirst;
-    public float currentLove;
-    public float currentBladder;
-    public float currentHygiene;
+    public static float currentEnergy;
+    public static float currentHunger;
+    public static float currentThirst;
+    public static float currentLove;
+    public static float currentBladder;
+    public static float currentHygiene;
     public NeedsBar energyBar;
     public NeedsBar hungerBar;
     public NeedsBar thirstBar;

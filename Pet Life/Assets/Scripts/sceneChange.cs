@@ -7,7 +7,7 @@ public class sceneChange : MonoBehaviour
 {
     public void startMainGame()
     {
-        SceneManager.LoadScene("Pet Selection Scene");
+        SceneManager.LoadScene("Difficulty Scene");
     }
     public void startTutorial()
     {

@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameObject playerPet;
+    public static float difficulty = 1f; // Default difficulty
+    public static string petName = "Dog"; // Default petName
     public GameObject defaultPet;
-    public static string petName = "Dog";
     public GameObject[] petPrefabs;
     private GameManager gameManager;
 

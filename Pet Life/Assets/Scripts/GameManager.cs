@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameObject playerPet;
+    public static float difficulty = 1f; // Default difficulty
+    public static string petName = "Dog"; // Default petName
     public GameObject defaultPet;
-    public static string petName = "Dog";
     public GameObject[] petPrefabs;
     private GameManager gameManager;
 
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         Vector3 spawnPos = new Vector3(0, -3.8f, 0);
 
-        if (scene.name == "Living Room Scene" || scene.name == "Bathroom") {
+        if (scene.name == "Living Room Scene" || scene.name == "Bathroom" || scene.name == "Outside Scene") {
             if (playerPet != null) {
                 Instantiate(playerPet, spawnPos, playerPet.transform.rotation);
             } else {

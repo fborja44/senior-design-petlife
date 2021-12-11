@@ -7,10 +7,24 @@ public class sceneChange : MonoBehaviour
 {
     public void startMainGame()
     {
-        SceneManager.LoadScene("Pet Selection Scene");
+        SceneManager.LoadScene("Difficulty Scene");
     }
     public void startTutorial()
     {
         SceneManager.LoadScene("Tutorial Scene");
+    }
+    public void toOutside()
+    {
+        SceneManager.LoadScene("Outside Scene");
+    }
+
+    public void toBathroom()
+    {
+        SceneManager.LoadScene("Bathroom");
+    }
+
+    public void toLivingRoom()
+    {
+        SceneManager.LoadScene("Living Room Scene");
     }
 }

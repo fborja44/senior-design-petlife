@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Living Room Scene.unity
     guid: 53652068dc5c35443b48ccfa8b29320f
+  - enabled: 1
+    path: Assets/Scenes/Difficulty Scene.unity
+    guid: c5dfbf2974b84db48bc4ffaab7628f96
+  - enabled: 1
+    path: Assets/Scenes/Outside Scene.unity
+    guid: 176b3e01f2e058149adbe6f3ccd86081
+  - enabled: 1
+    path: Assets/Scenes/Bathroom.unity
+    guid: 9b26e1dbbe9e6564795430ea0ee8d0f2
   m_configObjects: {}

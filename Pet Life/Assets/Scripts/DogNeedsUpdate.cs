@@ -8,13 +8,13 @@ public class DogNeedsUpdate : MonoBehaviour
     private GameManager gameManager;
     private Text needsName;
     private float difficulty;
-    public float max = 500;
-    public static float currentEnergy;
-    public static float currentHunger;
-    public static float currentThirst;
-    public static float currentLove;
-    public static float currentBladder;
-    public static float currentHygiene;
+    public static float max = 500;
+    public static float currentEnergy = max;
+    public static float currentHunger = max;
+    public static float currentThirst = max;
+    public static float currentLove = max/2;
+    public static float currentBladder = max;
+    public static float currentHygiene = max;
     public NeedsBar energyBar;
     public NeedsBar hungerBar;
     public NeedsBar thirstBar;
@@ -22,9 +22,25 @@ public class DogNeedsUpdate : MonoBehaviour
     public NeedsBar bladderBar;
     public NeedsBar hygieneBar;
     float count = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
+        // Set needs bar to current values
+        energyBar.SetMaxNeeds(max);
+        hungerBar.SetMaxNeeds(max);
+        thirstBar.SetMaxNeeds(max);
+        loveBar.SetMaxNeeds(max/2);
+        bladderBar.SetMaxNeeds(max);
+        hygieneBar.SetMaxNeeds(max);
+
+        energyBar.SetNeeds(currentEnergy);
+        hungerBar.SetNeeds(currentHunger);
+        thirstBar.SetNeeds(currentThirst);
+        loveBar.SetNeeds(currentLove);
+        bladderBar.SetNeeds(currentBladder);
+        hygieneBar.SetNeeds(currentHygiene);
+
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         // Set difficulty
         difficulty = GameManager.difficulty;
@@ -37,18 +53,7 @@ public class DogNeedsUpdate : MonoBehaviour
             needsName.text = name + "'s Needs";
         }
 
-        currentEnergy = max;
-        currentHunger = max; 
-        currentThirst = max;
-        currentLove = max/2;
-        currentBladder = max;
-        currentHygiene = max;
-        energyBar.SetMaxNeeds(max);
-        hungerBar.SetMaxNeeds(max);
-        thirstBar.SetMaxNeeds(max);
-        loveBar.SetMaxNeeds(max/2);
-        bladderBar.SetMaxNeeds(max);
-        hygieneBar.SetMaxNeeds(max);
+
     }
 
     // Update is called once per frame

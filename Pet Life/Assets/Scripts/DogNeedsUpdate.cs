@@ -131,13 +131,13 @@ public class DogNeedsUpdate : MonoBehaviour
 
     void GainHygiene(float hygieneGain) {
         float newHygiene = currentHygiene + hygieneGain;
-        currentHygiene = Mathf.Min(hygieneGain, max);
+        currentHygiene = Mathf.Min(newHygiene, max);
         hygieneBar.SetNeeds(currentHygiene);
     }
 
     void GainLove(float loveGain){
         float newLove = currentLove + loveGain;
-        currentLove = Mathf.Min(loveGain, max);
+        currentLove = Mathf.Min(newLove, max);
         loveBar.SetNeeds(currentLove);
     }
 
@@ -187,5 +187,21 @@ public class DogNeedsUpdate : MonoBehaviour
     public void DrinkWater() {
         float thirstGained = (float)(max * 0.5);
         GainThirst(thirstGained);
+    }
+
+    public void Rest() {
+        float energyGained = (float)(max * 0.5);
+        GainEnergy(energyGained);
+    }
+
+    public void UseFrisbee() {
+        float energyUsed = (float)(max * 0.15);
+        float hungerLost = (float)(max * 0.18);
+        float thirstLost = (float)(max * 0.18);
+        float loveGained = (float)(max * 0.15);
+        LoseEnergy(energyUsed);
+        LoseHunger(hungerLost);
+        LoseThirst(thirstLost);
+        GainLove(loveGained);
     }
 }

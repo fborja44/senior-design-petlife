@@ -70,62 +70,74 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     void LoseEnergy(float energyLost){
-        currentEnergy -= energyLost * difficulty;
+        float newEnergy = currentEnergy - (energyLost * difficulty);
+        currentEnergy = Mathf.Max(newEnergy, 0);
         energyBar.SetNeeds(currentEnergy);
     }
 
     void LoseHunger(float hungerLost){
-        currentHunger -= hungerLost * difficulty;
+        float newHunger = currentHunger - (hungerLost * difficulty);
+        currentHunger = Mathf.Max(newHunger, 0);
         hungerBar.SetNeeds(currentHunger);
     }
 
     void LoseThirst(float thirstLost){
-        currentThirst -= thirstLost * difficulty;
+        float newThirst = currentThirst - (thirstLost * difficulty);
+        currentThirst = Mathf.Max(newThirst, 0);
         thirstBar.SetNeeds(currentThirst);
     }
 
     void LoseLove(float loveLost){
-        currentLove -= loveLost * difficulty;
+        float newLove = currentLove - (loveLost * difficulty);
+        currentLove = Mathf.Max(newLove, 0);
         loveBar.SetNeeds(currentLove);
     }
 
     void LoseBladder(float bladderLost){
-        currentBladder -= bladderLost * difficulty;
+        float newBladder = currentBladder - (bladderLost * difficulty);
+        currentBladder = Mathf.Max(newBladder, 0);
         bladderBar.SetNeeds(currentBladder);
     }
 
     void LoseHygiene(float hygieneLost){
-        currentHygiene -= hygieneLost * difficulty;
+        float newHygiene = currentHygiene - (hygieneLost * difficulty);
+        currentHygiene = Mathf.Max(newHygiene, 0);
         hygieneBar.SetNeeds(currentHygiene);
     }
 
     void GainEnergy(float sleep) {
-        currentEnergy += sleep;
+        float newEnergy = currentEnergy + sleep;
+        currentEnergy = Mathf.Min(newEnergy, max);
         energyBar.SetNeeds(currentEnergy);
     }
 
     void GainBladder(float bladderGain){
-        currentBladder += bladderGain;
+        float newBladder = currentBladder + bladderGain;
+        currentBladder = Mathf.Min(newBladder, max);
         bladderBar.SetNeeds(currentBladder);
     }
 
     void GainHunger(float hungerGain) {
-        currentHunger +=hungerGain;
+        float newHunger = currentHunger + hungerGain;
+        currentHunger = Mathf.Min(newHunger, max);
         hungerBar.SetNeeds(currentHunger);
     }
 
     void GainThirst(float thirstGain) {
-        currentThirst += thirstGain;
+        float newThirst = currentThirst + thirstGain;
+        currentThirst = Mathf.Min(newThirst, max);
         thirstBar.SetNeeds(thirstGain);
     }
 
     void GainHygiene(float hygieneGain) {
-        currentHygiene += hygieneGain;
+        float newHygiene = currentHygiene + hygieneGain;
+        currentHygiene = Mathf.Min(hygieneGain, max);
         hygieneBar.SetNeeds(currentHygiene);
     }
 
     void GainLove(float loveGain){
-        currentLove -= loveGain;
+        float newLove = currentLove + loveGain;
+        currentLove = Mathf.Min(loveGain, max);
         loveBar.SetNeeds(currentLove);
     }
 
@@ -152,7 +164,9 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void Fetch(){
         float energyUsed = (float)(max * 0.15);
+        float thirstUsed = (float)(max * 0.1);
         LoseEnergy(energyUsed);
+        LoseThirst(thirstUsed);
     }
 
     public void Speak(){
@@ -163,5 +177,15 @@ public class DogNeedsUpdate : MonoBehaviour
     public void TakeBath() {
         float hygieneGained = (float)(max * 0.5);
         GainHygiene(hygieneGained);
+    }
+
+    public void EatFood() {
+        float hungerGained = (float)(max * 0.5);
+        GainHunger(hungerGained);
+    }
+
+    public void DrinkWater() {
+        float thirstGained = (float)(max * 0.5);
+        GainThirst(thirstGained);
     }
 }

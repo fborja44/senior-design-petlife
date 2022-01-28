@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: To Living Room
+  m_text: To Kitchen
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e773373e03579547add8e1099fc1bb9, type: 2}
   m_sharedMaterial: {fileID: -3708090872115361936, guid: 3e773373e03579547add8e1099fc1bb9, type: 2}
@@ -2016,7 +2016,7 @@ GameObject:
   - component: {fileID: 703089640}
   - component: {fileID: 703089639}
   m_Layer: 5
-  m_Name: To Living Room
+  m_Name: To Kitchen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2140,7 +2140,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1844749408}
         m_TargetAssemblyTypeName: sceneChange, Assembly-CSharp
-        m_MethodName: toLivingRoom
+        m_MethodName: toKitchen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         Vector3 spawnPos = new Vector3(0, -3.8f, 0);
 
-        if (scene.name == "Living Room Scene" || scene.name == "Bathroom" || scene.name == "Outside Scene") {
+        if (scene.name == "Living Room Scene" || scene.name == "Bathroom" || scene.name == "Outside Scene" || scene.name == "Kitchen Scene") {
             if (playerPet != null) {
                 Instantiate(playerPet, spawnPos, playerPet.transform.rotation);
             } else {

@@ -27,4 +27,9 @@ public class sceneChange : MonoBehaviour
     {
         SceneManager.LoadScene("Living Room Scene");
     }
+
+    public void toKitchen()
+    {
+        SceneManager.LoadScene("Kitchen Scene");
+    }
 }

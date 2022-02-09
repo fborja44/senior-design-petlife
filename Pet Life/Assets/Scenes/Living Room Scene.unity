@@ -1546,7 +1546,7 @@ MonoBehaviour:
   loveBar: {fileID: 1907875328}
   bladderBar: {fileID: 284880619}
   hygieneBar: {fileID: 1418129276}
-  treatButton: {fileID: 0}
+  treatButton: {fileID: 1346434726}
 --- !u!4 &1263834128
 Transform:
   m_ObjectHideFlags: 0

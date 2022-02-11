@@ -794,7 +794,7 @@ RectTransform:
   - {fileID: 25583797}
   - {fileID: 413630565}
   m_Father: {fileID: 698517144}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1041,7 +1041,6 @@ RectTransform:
   - {fileID: 196250874}
   - {fileID: 474247772}
   - {fileID: 195082933}
-  - {fileID: 1346434725}
   - {fileID: 663635805}
   - {fileID: 978093715}
   - {fileID: 1150387705}
@@ -1221,7 +1220,7 @@ RectTransform:
   - {fileID: 1664929873}
   - {fileID: 911631504}
   m_Father: {fileID: 698517144}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1410,7 +1409,7 @@ RectTransform:
   m_Children:
   - {fileID: 577145631}
   m_Father: {fileID: 698517144}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1632,15 +1631,15 @@ RectTransform:
   m_GameObject: {fileID: 1346434724}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99982065, y: 0.99982065, z: 0.99982065}
+  m_LocalScale: {x: 0.9998207, y: 0.9998207, z: 0.9998207}
   m_Children:
   - {fileID: 128203293}
-  m_Father: {fileID: 698517144}
-  m_RootOrder: 4
+  m_Father: {fileID: 474247772}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 593.5129, y: 99.6}
+  m_AnchoredPosition: {x: 223.99994, y: -8.000023}
   m_SizeDelta: {x: 100, y: 48.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1346434726
@@ -2100,8 +2099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7b4be4e50570c449b8078670fb91ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  speed: 0.01
 --- !u!114 &1907875328 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4744423703838309668, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}

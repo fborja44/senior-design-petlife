@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameObject playerPet;
-    public static float difficulty = 1f; // Default difficulty
-    public static string petName = "Dog"; // Default petName
+    public static GameObject playerPet;     // Parent player pet object
+    public static Transform playerObject;   // First child of player pet object
+    public static float difficulty = 1f;    // Default difficulty
+    public static string petName = "Dog";   // Default petName
     public GameObject defaultPet;
     public GameObject[] petPrefabs;
+    public static Animator animator;        // Animator for pet
     private GameManager gameManager;
 
     // Start is called before the first frame update
@@ -37,10 +39,13 @@ public class GameManager : MonoBehaviour
 
         if (scene.name == "Living Room Scene" || scene.name == "Bathroom" || scene.name == "Outside Scene" || scene.name == "Kitchen Scene") {
             if (playerPet != null) {
-                Instantiate(playerPet, spawnPos, playerPet.transform.rotation);
+                playerPet = Instantiate(playerPet, spawnPos, playerPet.transform.rotation);
             } else {
-                Instantiate(defaultPet, spawnPos, defaultPet.transform.rotation);
+                playerPet = Instantiate(defaultPet, spawnPos, defaultPet.transform.rotation);
             }
+            playerPet.name = "Player Pet";
+            playerObject = playerPet.transform.GetChild(0);
+            animator = playerObject.GetComponent<Animator>();
         }
     }
 }

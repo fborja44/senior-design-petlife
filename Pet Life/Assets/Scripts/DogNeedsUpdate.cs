@@ -395,7 +395,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GainEnergy(energyGained);
     }
 
-    public void UseFrisbee() {
+    public void UseBall() {
         float energyUsed = (float)(max * 0.15);
         float hungerLost = (float)(max * 0.18);
         float thirstLost = (float)(max * 0.18);

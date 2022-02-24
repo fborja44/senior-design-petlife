@@ -9,6 +9,7 @@ public class DogNeedsUpdate : MonoBehaviour
     private Text needsName;
     private float difficulty;
     public static float max = 500;
+    public int min = 0;
     public static float currentEnergy = max;
     public static float currentHunger = max;
     public static float currentThirst = max;
@@ -29,6 +30,14 @@ public class DogNeedsUpdate : MonoBehaviour
     public NeedsBar bladderBar;
     public NeedsBar hygieneBar;
     public Button treatButton; 
+    public Button sitButton;
+
+    public TrickBars sitBar;
+    public TrickBars layBar;
+    public TrickBars rollBar;
+    public TrickBars fetchBar;
+    public TrickBars speakBar;
+    //public Button sitButton;
     float count = 0;
     
     // Start is called before the first frame update
@@ -51,7 +60,16 @@ public class DogNeedsUpdate : MonoBehaviour
         bladderBar.SetNeeds(currentBladder);
         hygieneBar.SetNeeds(currentHygiene);
 
+        // Set tricks bar to current values
+        sitBar.SetMinTrick(min);
+        layBar.SetMinTrick(min);
+        rollBar.SetMinTrick(min);
+        fetchBar.SetMinTrick(min);
+        speakBar.SetMinTrick(min);
+        
+
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        
         // Set difficulty
         difficulty = GameManager.difficulty;
         // Set name
@@ -77,6 +95,17 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseThirst(2);
             LoseHygiene(1);
         }
+
+        sitBar.SetTrick(sitLevel);
+        layBar.SetTrick(layLevel);
+        rollBar.SetTrick(rollLevel);
+        fetchBar.SetTrick(fetchLevel);
+        speakBar.SetTrick(speakLevel);
+        sitBar.GetComponentInChildren<Text>().text = "Sit                                     " + sitLevel;
+        layBar.GetComponentInChildren<Text>().text = "Lay                                    " + layLevel;
+        rollBar.GetComponentInChildren<Text>().text = "Roll                                   " + rollLevel;
+        fetchBar.GetComponentInChildren<Text>().text = "Fetch                                 " + fetchLevel;
+        speakBar.GetComponentInChildren<Text>().text = "Speak                                " + speakLevel;
     }
 
     void LoseEnergy(float energyLost){

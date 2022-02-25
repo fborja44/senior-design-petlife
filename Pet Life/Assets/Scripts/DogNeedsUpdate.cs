@@ -38,6 +38,8 @@ public class DogNeedsUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Hide alert
+        GameObject.Find("Alert").SetActive(false);
         // Set alert text
         alertText = alert.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
 
@@ -422,16 +424,53 @@ public class DogNeedsUpdate : MonoBehaviour
     public void Alert() {
         float[] needs = {currentEnergy, currentHunger, currentThirst, currentLove, currentBladder, currentHygiene};
         for (int i = 0; i < needs.Length; i++) {
-            if (needs[i] < max/5 && alertToggle) {
-                StartCoroutine(SendAlert());
+            string need;
+            switch (i) {
+                case 0:
+                    need = "Energy";
+                    break;
+                case 1:
+                    need = "Hunger";
+                    break;
+                case 2:
+                    need = "Thirst";
+                    break;
+                case 3:
+                    need = "Love";
+                    break;
+                case 4:
+                    need = "Bladder";
+                    break;
+                case 5:
+                    need = "Hygiene";
+                    break;
+                default:
+                    need = "Needs";
+                    break;
+            }
+            string name = GameManager.petName;
+            if (needs[i] < max/4 && alertToggle) {
+                if (needs[i] == 0) {
+                    if (name.ToLower()[name.Length - 1] == 's') {
+                        StartCoroutine(SendAlert(name + "' " + need + " is empty!"));
+                    } else {
+                        StartCoroutine(SendAlert(name + "'s " + need + " is empty!"));
+                    }
+                } else {
+                    if (name.ToLower()[name.Length - 1] == 's') {
+                        StartCoroutine(SendAlert(name + "' " + need + " is getting low!"));
+                    } else {
+                        StartCoroutine(SendAlert(name + "'s " + need + " is getting low!"));
+                    }
+                }
                 StartCoroutine(DisableAlert());
                 return;
             }
         }
     }
 
-    IEnumerator SendAlert() {
-        alertText.text = GameManager.petName + "'s needs are getting low!";
+    IEnumerator SendAlert(string text) {
+        alertText.text = text;
         alert.SetActive(true);
         yield return new WaitForSeconds(5);
         alert.SetActive(false);
@@ -439,7 +478,22 @@ public class DogNeedsUpdate : MonoBehaviour
 
     IEnumerator DisableAlert() {
         alertToggle = false;
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(10);
         alertToggle = true;
+    }
+
+    public void ResetNeeds() {
+        GainEnergy(max);
+        GainHunger(max);
+        GainThirst(max);
+        GainLove(max/2);
+        GainBladder(max);
+        GainHygiene(max);
+        energyBar.SetNeeds(currentEnergy);
+        hungerBar.SetNeeds(currentHunger);
+        thirstBar.SetNeeds(currentThirst);
+        loveBar.SetNeeds(currentLove);
+        bladderBar.SetNeeds(currentBladder);
+        hygieneBar.SetNeeds(currentHygiene);
     }
 }

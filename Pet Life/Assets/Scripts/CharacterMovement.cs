@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
 
     IEnumerator Idle() {
         speed = 0f;
-        yield return new WaitForSecondsRealtime(Random.Range(1, 4));
+        yield return new WaitForSecondsRealtime(Random.Range(2, 5));
         speed = 1f;
     }
 }

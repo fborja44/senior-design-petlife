@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeSound : MonoBehaviour
-{   private Sprite volume;
+{   public Sprite volume;
     public Sprite mute;
     public Button button;
     private bool isOn = true;
     // Start is called before the first frame update
-    public AudioSource audioSource;
     void Start()
     {
-        volume = button.image.sprite;
+        if(AudioListener.pause){
+            button.image.sprite = mute;
+            isOn = false;
+        }else{
+            button.image.sprite = volume;
+            isOn = true;
+        }
     }
 
     // Update is called once per frame
@@ -26,11 +31,11 @@ public class ChangeSound : MonoBehaviour
         {
             button.image.sprite = mute;
             isOn = false;
-            audioSource.mute = true;
+            AudioListener.pause = true;
         } else{
             button.image.sprite = volume;
             isOn = true;
-            audioSource.mute = false;
+            AudioListener.pause = false;
         }
     }
 }

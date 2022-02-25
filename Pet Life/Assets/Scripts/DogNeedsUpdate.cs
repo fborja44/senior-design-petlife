@@ -15,12 +15,20 @@ public class DogNeedsUpdate : MonoBehaviour
     public static float currentLove = max/2;
     public static float currentBladder = max;
     public static float currentHygiene = max;
+    public static int sitLevel = 1;
+    public static int layLevel = 1;
+    public static int rollLevel = 1;
+    public static int fetchLevel = 1;
+    public static int speakLevel = 1;
+    public static bool lastTrickSuccess = false;
+    public static int lastTrick; // 1 = sit, 2 = lay, 3 = roll, 4 = fetch, 5 = speak
     public NeedsBar energyBar;
     public NeedsBar hungerBar;
     public NeedsBar thirstBar;
     public NeedsBar loveBar;
     public NeedsBar bladderBar;
     public NeedsBar hygieneBar;
+    public Button treatButton; 
     float count = 0;
     
     // Start is called before the first frame update
@@ -33,6 +41,8 @@ public class DogNeedsUpdate : MonoBehaviour
         loveBar.SetMaxNeeds(max/2);
         bladderBar.SetMaxNeeds(max);
         hygieneBar.SetMaxNeeds(max);
+
+        treatButton.interactable = false;
 
         energyBar.SetNeeds(currentEnergy);
         hungerBar.SetNeeds(currentHunger);
@@ -141,7 +151,83 @@ public class DogNeedsUpdate : MonoBehaviour
         loveBar.SetNeeds(currentLove);
     }
 
+    public void giveTreat(){
+        treatButton.interactable = false;
+        if (lastTrickSuccess == true) {
+            if (lastTrick == 1 & sitLevel < 10) {
+                sitLevel = sitLevel + 1;
+                Debug.Log("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel);
+            }
+            if (lastTrick == 2 & layLevel < 10) {
+                layLevel = layLevel + 1;
+                Debug.Log("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel);
+            } 
+            if (lastTrick == 3 & rollLevel < 10) {
+                rollLevel = rollLevel + 1;
+                Debug.Log("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel);
+            } 
+            if (lastTrick == 4 & fetchLevel < 10) {
+                fetchLevel = fetchLevel + 1;
+                Debug.Log("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel);
+            } 
+            if (lastTrick == 5 & speakLevel < 10) {
+                speakLevel = speakLevel + 1;
+                Debug.Log("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel);
+            }  
+        }
+        else {
+            if (lastTrick == 1 & sitLevel > 1) {
+                sitLevel = sitLevel - 1;
+                Debug.Log("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel);
+            }
+            if (lastTrick == 2 & layLevel > 1) {
+                layLevel = layLevel - 1;
+                Debug.Log("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel);
+            } 
+            if (lastTrick == 3 & rollLevel > 1) {
+                rollLevel = rollLevel - 1;
+                Debug.Log("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel);
+            } 
+            if (lastTrick == 4 & fetchLevel > 1) {
+                fetchLevel = fetchLevel - 1;
+                Debug.Log("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel);
+            } 
+            if (lastTrick == 5 & speakLevel > 1) {
+                speakLevel = speakLevel - 1;
+                Debug.Log("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel);
+            }  
+        }
+    }
     public void Sit(){
+        int rand_num = Random.Range(1,10);
+        lastTrick = 1;
+        Debug.Log("Sit level is " + sitLevel + ", random number was " + rand_num);
+        if (sitLevel >= rand_num) {
+            Debug.Log("Dog succesfully did sit");
+            lastTrickSuccess = true;
+            executeSit();
+        } else {
+            Debug.Log("Dog failed sit");
+            lastTrickSuccess = false;
+            int rand_num1 = Random.Range(1,4);        
+            if (rand_num1 == 1) {
+                executeLay();
+            }
+            else if (rand_num1 == 2) {
+                executeRoll();
+            }
+            else if (rand_num1 == 3) {
+                executeFetch();
+            }
+            else if (rand_num1 == 4) {
+                executeSpeak();
+            }
+        }
+    }
+
+    public void executeSit(){
+        treatButton.interactable = true;
+        Debug.Log("Dog has executed Sit");
         float energyUsed = (float)(max * 0.05);
         LoseEnergy(energyUsed);
         float hygieneUsed = (float)(max * 0.05);
@@ -149,6 +235,35 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Lay(){
+        lastTrick = 2;
+        int rand_num = Random.Range(1,10);
+        Debug.Log("Lay level is " + layLevel + ", random number was " + rand_num);
+        if (layLevel >= rand_num) {
+            Debug.Log("Dog succesfully did lay");
+            lastTrickSuccess = true;
+            executeLay();
+        } else {
+            Debug.Log("Dog failed lay");
+            lastTrickSuccess = false;
+            int rand_num1 = Random.Range(1,4);
+            if (rand_num1 == 1) {
+                executeSit();
+            }
+            else if (rand_num1 == 2) {
+                executeRoll();
+            }
+            else if (rand_num1 == 3) {
+                executeFetch();
+            }
+            else if (rand_num1 == 4) {
+                executeSpeak();
+            }
+        }
+    }
+
+    public void executeLay(){
+        treatButton.interactable = true;
+        Debug.Log("Dog has executed Lay");
         float energyUsed = (float)(max * 0.05);
         LoseEnergy(energyUsed);
         float hygieneUsed = (float)(max * 0.1);
@@ -156,6 +271,35 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Roll(){
+        lastTrick = 3;
+        int rand_num = Random.Range(1,10);
+        Debug.Log("Roll level is " + rollLevel + ", random number was " + rand_num);
+        if (rollLevel >= rand_num) {
+            Debug.Log("Dog succesfully did roll");
+            lastTrickSuccess = true;
+            executeRoll();
+        } else {
+            Debug.Log("Dog failed roll");
+            lastTrickSuccess = false;
+            int rand_num1 = Random.Range(1,4);
+            if (rand_num1 == 1) {
+                executeSit();
+            }
+            else if (rand_num1 == 2) {
+                executeLay();
+            }
+            else if (rand_num1 == 3) {
+                executeFetch();
+            }
+            else if (rand_num1 == 4) {
+                executeSpeak();
+            }
+        }
+    }
+
+    public void executeRoll(){
+        treatButton.interactable = true;
+        Debug.Log("Dog has executed Roll");
         float energyUsed = (float)(max * 0.08);
         LoseEnergy(energyUsed);
         float hygieneUsed = (float)(max * 0.2);
@@ -163,6 +307,35 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Fetch(){
+        lastTrick = 4;
+        int rand_num = Random.Range(1,10);
+        Debug.Log("Fetch level is " + fetchLevel + ", random number was " + rand_num);
+        if (fetchLevel >= rand_num) {
+            Debug.Log("Dog succesfully did fetch");
+            lastTrickSuccess = true;
+            executeFetch();
+        } else {
+            Debug.Log("Dog failed fetch");
+            lastTrickSuccess = false;
+            int rand_num1 = Random.Range(1,4);
+            if (rand_num1 == 1) {
+                executeSit();
+            }
+            else if (rand_num1 == 2) {
+                executeLay();
+            }
+            else if (rand_num1 == 3) {
+                executeRoll();
+            }
+            else if (rand_num1 == 4) {
+                executeSpeak();
+            }
+        }
+    }
+
+    public void executeFetch() {
+        treatButton.interactable = true;
+        Debug.Log("Dog has executed Fetch");
         float energyUsed = (float)(max * 0.15);
         float thirstUsed = (float)(max * 0.1);
         LoseEnergy(energyUsed);
@@ -170,6 +343,34 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Speak(){
+        lastTrick = 5;
+        int rand_num = Random.Range(1,10);
+        Debug.Log("Speak level is " + speakLevel + ", random number was " + rand_num);
+        if (speakLevel >= rand_num) {
+            Debug.Log("Dog succesfully did speak");
+            lastTrickSuccess = true;
+            executeSpeak();
+        } else {
+            Debug.Log("Dog failed speak");
+            lastTrickSuccess = false;
+            int rand_num1 = Random.Range(1,4);
+            if (rand_num1 == 1) {
+                executeSit();
+            }
+            else if (rand_num1 == 2) {
+                executeLay();
+            }
+            else if (rand_num1 == 3) {
+                executeRoll();
+            }
+            else if (rand_num1 == 4) {
+                executeFetch();
+            }
+        }
+    }
+    public void executeSpeak(){
+        treatButton.interactable = true;
+        Debug.Log("Dog has executed Speak");
         float energyUsed = (float)(max * 0.06);
         LoseEnergy(energyUsed);
     }
@@ -194,7 +395,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GainEnergy(energyGained);
     }
 
-    public void UseFrisbee() {
+    public void UseBall() {
         float energyUsed = (float)(max * 0.15);
         float hungerLost = (float)(max * 0.18);
         float thirstLost = (float)(max * 0.18);

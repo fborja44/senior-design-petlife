@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public class DogNeedsUpdate : MonoBehaviour
-{
+{   
     private GameManager gameManager;
     private Text needsName;
     private float difficulty;
@@ -29,11 +30,17 @@ public class DogNeedsUpdate : MonoBehaviour
     public NeedsBar bladderBar;
     public NeedsBar hygieneBar;
     public Button treatButton; 
+    public GameObject alert;
+    private TextMeshProUGUI alertText;
+    private bool alertToggle = true;
     float count = 0;
     
     // Start is called before the first frame update
     void Start()
     {
+        // Set alert text
+        alertText = alert.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+
         // Set needs bar to current values
         energyBar.SetMaxNeeds(max);
         hungerBar.SetMaxNeeds(max);
@@ -62,13 +69,12 @@ public class DogNeedsUpdate : MonoBehaviour
         } else {
             needsName.text = name + "'s Needs";
         }
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        Alert();
         count += 1;
         if (count == 600){
             count = 0;
@@ -411,5 +417,29 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetFloat("speed", 0);
         yield return new WaitForSecondsRealtime(Random.Range(1, 4));
         GameManager.animator.SetFloat("speed", 0);
+    }
+
+    public void Alert() {
+        float[] needs = {currentEnergy, currentHunger, currentThirst, currentLove, currentBladder, currentHygiene};
+        for (int i = 0; i < needs.Length; i++) {
+            if (needs[i] < max/5 && alertToggle) {
+                StartCoroutine(SendAlert());
+                StartCoroutine(DisableAlert());
+                return;
+            }
+        }
+    }
+
+    IEnumerator SendAlert() {
+        alertText.text = GameManager.petName + "'s needs are getting low!";
+        alert.SetActive(true);
+        yield return new WaitForSeconds(5);
+        alert.SetActive(false);
+    }
+
+    IEnumerator DisableAlert() {
+        alertToggle = false;
+        yield return new WaitForSeconds(20);
+        alertToggle = true;
     }
 }

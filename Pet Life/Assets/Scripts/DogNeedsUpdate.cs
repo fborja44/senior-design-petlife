@@ -391,6 +391,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Rest() {
+        GameManager.animator.SetFloat("speed", 0);
         float energyGained = (float)(max * 0.5);
         GainEnergy(energyGained);
     }
@@ -404,5 +405,11 @@ public class DogNeedsUpdate : MonoBehaviour
         LoseHunger(hungerLost);
         LoseThirst(thirstLost);
         GainLove(loveGained);
+    }
+
+    IEnumerator Idle() {
+        GameManager.animator.SetFloat("speed", 0);
+        yield return new WaitForSecondsRealtime(Random.Range(1, 4));
+        GameManager.animator.SetFloat("speed", 0);
     }
 }

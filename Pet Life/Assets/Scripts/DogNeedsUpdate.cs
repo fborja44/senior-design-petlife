@@ -38,6 +38,7 @@ public class DogNeedsUpdate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // Hide alert
         GameObject.Find("Alert").SetActive(false);
         // Set alert text
@@ -389,11 +390,13 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void EatFood() {
+        StartCoroutine(Eat());
         float hungerGained = (float)(max * 0.5);
         GainHunger(hungerGained);
     }
 
     public void DrinkWater() {
+        StartCoroutine(Drink());
         float thirstGained = (float)(max * 0.5);
         GainThirst(thirstGained);
     }
@@ -419,6 +422,38 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetFloat("speed", 0);
         yield return new WaitForSecondsRealtime(Random.Range(1, 4));
         GameManager.animator.SetFloat("speed", 0);
+    }
+
+    IEnumerator Eat() {
+        GameObject playerPet = GameManager.playerPet;
+        Vector3 petPos = playerPet.transform.position;
+        float petSpeed = GameManager.animator.GetFloat("speed");
+        GameManager.animator.SetFloat("speed", 0);
+        GameObject foodBowl = GameObject.Find("Food Bowl");
+        Vector3 bowlPos = foodBowl.transform.position;
+        GameManager.animator.SetBool("is_eating", true);
+        playerPet.transform.position = new Vector3(bowlPos.x + 1, bowlPos.y - (float)0.5, petPos.z);
+        yield return new WaitForSecondsRealtime(4);
+        GameManager.animator.SetFloat("speed", petSpeed);
+        GameManager.animator.SetBool("is_eating", false);
+        
+        playerPet.transform.position = petPos;
+    }
+
+    IEnumerator Drink() {
+        GameObject playerPet = GameManager.playerPet;
+        Vector3 petPos = playerPet.transform.position;
+        // float petSpeed = GameManager.animator.GetFloat("speed");
+        GameManager.animator.SetFloat("speed", 0);
+        GameObject waterBowl = GameObject.Find("Water Bowl");
+        Vector3 bowlPos = waterBowl.transform.position;
+        GameManager.animator.SetBool("is_drinking", true);
+        playerPet.transform.position = new Vector3(bowlPos.x + 1, bowlPos.y - (float)0.5, petPos.z);
+        yield return new WaitForSecondsRealtime(4);
+        // GameManager.animator.SetFloat("speed", petSpeed);
+        GameManager.animator.SetBool("is_drinking", false);
+        
+        playerPet.transform.position = petPos;
     }
 
     public void Alert() {

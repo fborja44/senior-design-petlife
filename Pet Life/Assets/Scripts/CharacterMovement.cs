@@ -22,23 +22,25 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > idlePauseTime) {
-            StartCoroutine(Idle());
-            idlePauseTime = Time.time + Random.Range(3, 10);
-        }
-        GameManager.animator.SetFloat("speed", speed);
-        if (direction == -1) {
-            GameManager.playerPet.transform.Translate(Vector3.right * Time.deltaTime * speed * direction);
-        } else if (direction == 1) {
-            GameManager.playerPet.transform.Translate(Vector3.right * Time.deltaTime * speed * direction);
-        }
-        if (direction == 1 && GameManager.playerPet.transform.position.x > 5) {
-            direction = -1;
-            GameManager.playerPet.transform.localScale = new Vector3(1, 1, 1);
-        }
-        if (direction == -1 && GameManager.playerPet.transform.position.x < -5) {
-            direction = 1;
-            GameManager.playerPet.transform.localScale = new Vector3(-1, 1, 1);
+        if (!(GameManager.animator.GetBool("is_eating") || GameManager.animator.GetBool("is_drinking"))) { // only move if not in another animation
+            if (Time.time > idlePauseTime) {
+                StartCoroutine(Idle());
+                idlePauseTime = Time.time + Random.Range(3, 10);
+            }
+            GameManager.animator.SetFloat("speed", speed);
+            if (direction == -1) {
+                GameManager.playerPet.transform.Translate(Vector3.right * Time.deltaTime * speed * direction);
+            } else if (direction == 1) {
+                GameManager.playerPet.transform.Translate(Vector3.right * Time.deltaTime * speed * direction);
+            }
+            if (direction == 1 && GameManager.playerPet.transform.position.x > 5) {
+                direction = -1;
+                GameManager.playerPet.transform.localScale = new Vector3(1, 1, 1);
+            }
+            if (direction == -1 && GameManager.playerPet.transform.position.x < -5) {
+                direction = 1;
+                GameManager.playerPet.transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
     }
 

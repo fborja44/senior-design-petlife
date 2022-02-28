@@ -38,11 +38,14 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(0, -3.8f, 0);
 
         if (scene.name == "Living Room Scene" || scene.name == "Bathroom" || scene.name == "Outside Scene" || scene.name == "Kitchen Scene") {
-            if (playerPet != null) {
-                playerPet = Instantiate(playerPet, spawnPos, playerPet.transform.rotation);
-            } else {
-                playerPet = Instantiate(defaultPet, spawnPos, defaultPet.transform.rotation);
+            if (!GameObject.Find("Player Pet")) {
+                if (playerPet != null) {
+                    playerPet = Instantiate(playerPet, spawnPos, playerPet.transform.rotation);
+                } else {
+                    playerPet = Instantiate(defaultPet, spawnPos, defaultPet.transform.rotation);
+                }
             }
+            DontDestroyOnLoad(playerPet);
             playerPet.name = "Player Pet";
             playerObject = playerPet.transform.GetChild(0);
             animator = playerObject.GetComponent<Animator>();

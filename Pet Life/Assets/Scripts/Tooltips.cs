@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public class Tooltips : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject tooltipText;
+    public GameObject tooltip;
     // Start is called before the first frame update
     void Start()
     {
-        tooltipText.SetActive(false);
+        tooltip.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,11 +20,11 @@ public class Tooltips : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData) {
         // Show text
-        tooltipText.SetActive(true);
+        tooltip.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         // Hide text
-        tooltipText.SetActive(false);
+        tooltip.SetActive(false);
     }
 }

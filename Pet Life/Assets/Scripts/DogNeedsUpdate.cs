@@ -385,29 +385,34 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void TakeBath() {
+        StartCoroutine(SendAlert("Gave " + GameManager.petName + " a bath!"));
         float hygieneGained = (float)(max * 0.5);
         GainHygiene(hygieneGained);
     }
 
     public void EatFood() {
+        StartCoroutine(SendAlert(GameManager.petName + " ate some food!"));
         StartCoroutine(Eat());
         float hungerGained = (float)(max * 0.5);
         GainHunger(hungerGained);
     }
 
     public void DrinkWater() {
+        StartCoroutine(SendAlert(GameManager.petName + " drank some water!"));
         StartCoroutine(Drink());
         float thirstGained = (float)(max * 0.5);
         GainThirst(thirstGained);
     }
 
     public void Rest() {
+        StartCoroutine(SendAlert(GameManager.petName + " rested for a bit!"));
         StartCoroutine(Sleep());
         float energyGained = (float)(max * 0.5);
         GainEnergy(energyGained);
     }
 
     public void UseBall() {
+        StartCoroutine(SendAlert("Played some fetch with " + GameManager.petName + "!"));
         float energyUsed = (float)(max * 0.15);
         float hungerLost = (float)(max * 0.18);
         float thirstLost = (float)(max * 0.18);
@@ -462,9 +467,8 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetFloat("speed", 0);
         GameObject dogBed = GameObject.Find("Dog Bed");
         Vector3 bedPos = dogBed.transform.position;
-        bedPos.z = playerPet.transform.position.z;
         GameManager.animator.SetBool("is_sleeping", true);
-        playerPet.transform.position = bedPos;
+        playerPet.transform.position = new Vector3(bedPos.x, bedPos.y - (float)0.1, playerPet.transform.position.z);
         yield return new WaitForSecondsRealtime(4);
         GameManager.animator.SetBool("is_sleeping", false);
         

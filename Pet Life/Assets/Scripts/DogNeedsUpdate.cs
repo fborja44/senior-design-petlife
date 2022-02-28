@@ -402,7 +402,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Rest() {
-        GameManager.animator.SetFloat("speed", 0);
+        StartCoroutine(Sleep());
         float energyGained = (float)(max * 0.5);
         GainEnergy(energyGained);
     }
@@ -452,6 +452,21 @@ public class DogNeedsUpdate : MonoBehaviour
         yield return new WaitForSecondsRealtime(4);
         // GameManager.animator.SetFloat("speed", petSpeed);
         GameManager.animator.SetBool("is_drinking", false);
+        
+        playerPet.transform.position = petPos;
+    }
+
+    IEnumerator Sleep() {
+        GameObject playerPet = GameManager.playerPet;
+        Vector3 petPos = playerPet.transform.position;
+        GameManager.animator.SetFloat("speed", 0);
+        GameObject dogBed = GameObject.Find("Dog Bed");
+        Vector3 bedPos = dogBed.transform.position;
+        bedPos.z = playerPet.transform.position.z;
+        GameManager.animator.SetBool("is_sleeping", true);
+        playerPet.transform.position = bedPos;
+        yield return new WaitForSecondsRealtime(4);
+        GameManager.animator.SetBool("is_sleeping", false);
         
         playerPet.transform.position = petPos;
     }

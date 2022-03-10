@@ -116,7 +116,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("hunger", false);
+            FailedAction("Hunger", false);
             return false;
         }
     }
@@ -132,7 +132,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("thirst", false);
+            FailedAction("Thirst", false);
             return false;
         }
     }
@@ -148,7 +148,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("love", false);
+            FailedAction("Love", false);
             return false;
         }
     }
@@ -164,7 +164,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("bladder", false);
+            FailedAction("Bladder", false);
             return false;
         }
     }
@@ -180,7 +180,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("hygiene", false);
+            FailedAction("Hygiene", false);
             return false;
         }
     }
@@ -196,7 +196,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("energy");
+            FailedAction("Energy");
             return false;
         }
     }
@@ -212,7 +212,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("bladder");
+            FailedAction("Bladder");
             return false;
         }
     }
@@ -228,7 +228,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("hunger");
+            FailedAction("Hunger");
             return false;
         }
     }
@@ -244,7 +244,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("thirst");
+            FailedAction("Thirst");
             return false;
         }
     }
@@ -260,7 +260,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("hygiene");
+            FailedAction("Hygiene");
             return false;
         }
     }
@@ -276,7 +276,7 @@ public class DogNeedsUpdate : MonoBehaviour
             return true;
         } else {
             // Display warning
-            FailedAction("love");
+            FailedAction("Love");
             return false;
         }
     }
@@ -543,8 +543,15 @@ public class DogNeedsUpdate : MonoBehaviour
         float hungerLost = (float)(max * 0.18);
         float thirstLost = (float)(max * 0.18);
         float loveGained = (float)(max * 0.15);
-        if (CheckNeeds("Energy", energyUsed, false) && CheckNeeds("Hunger", hungerLost, false) 
-            && CheckNeeds("Thirst", thirstLost, false) && CheckNeeds("Love", loveGained)) {
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else if (!CheckNeeds("Hunger", hungerLost, false)) {
+            FailedAction("Hunger", false);
+        } else if (!CheckNeeds("Thirst", thirstLost, false)) {
+            FailedAction("Thirst", false);
+        } else if (!CheckNeeds("Love", loveGained)) {
+            FailedAction("Love");
+        } else {
             StartCoroutine(SendAlert("Played some fetch with " + GameManager.petName + "!"));
             LoseEnergy(energyUsed);
             LoseHunger(hungerLost);

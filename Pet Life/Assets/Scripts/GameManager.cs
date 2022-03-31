@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject defaultPet;
     public GameObject[] petPrefabs;
     public static Animator animator;        // Animator for pet
+    public static int score = 0;            // Player score
+    public static bool busy = false;        // Keeps track of whether an action is being performed
+                                            // or game is paused
     private GameManager gameManager;
 
     // Start is called before the first frame update
@@ -24,7 +28,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        try {
+            GameObject scoreText = GameObject.Find("Score");
+            scoreText.transform.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+        } catch { /* Do nothing */ }
     }
 
     // Changes scene to title screen

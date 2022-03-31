@@ -79,7 +79,7 @@ public class DogNeedsUpdate : MonoBehaviour
     {
         Alert();
         count += 1;
-        if (count == 600){
+        if (count == 600 && !GameManager.busy){
             count = 0;
             LoseEnergy(1);
             LoseHunger(1);
@@ -509,32 +509,41 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void TakeBath() {
         float hygieneGained = (float)(max * 0.5);
+        if (GameManager.busy) return; // busy doing another action
         if (GainHygiene(hygieneGained)) {
             StartCoroutine(SendAlert("Gave " + GameManager.petName + " a bath!"));
+            StartCoroutine(Bathe());
+            GameManager.score += 100;
         }
     }
 
     public void EatFood() {
         float hungerGained = (float)(max * 0.5);
+        if (GameManager.busy) return; // busy doing another action
         if (GainHunger(hungerGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " ate some food!"));
             StartCoroutine(Eat());
+            GameManager.score += 100;
         }
     }
 
     public void DrinkWater() {
         float thirstGained = (float)(max * 0.5);
+        if (GameManager.busy) return; // busy doing another action
         if (GainThirst(thirstGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " drank some water!"));
             StartCoroutine(Drink());
+            GameManager.score += 100;
         }
     }
 
     public void Rest() {
         float energyGained = (float)(max * 0.5);
+        if (GameManager.busy) return; // busy doing another action
         if (GainEnergy(energyGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " rested for a bit!"));
             StartCoroutine(Sleep());
+            GameManager.score += 100;
         }
     }
 
@@ -543,6 +552,7 @@ public class DogNeedsUpdate : MonoBehaviour
         float hungerLost = (float)(max * 0.18);
         float thirstLost = (float)(max * 0.18);
         float loveGained = (float)(max * 0.15);
+        if (GameManager.busy) return; // busy doing another action
         if (!CheckNeeds("Energy", energyUsed, false)) {
             FailedAction("Energy", false);
         } else if (!CheckNeeds("Hunger", hungerLost, false)) {
@@ -557,7 +567,13 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseHunger(hungerLost);
             LoseThirst(thirstLost);
             GainLove(loveGained);
+            GameManager.score += 100;
         }
+    }
+
+    public void UseJump() {
+        if (GameManager.busy) return; // busy doing another action
+        StartCoroutine(Jump());
     }
 
     IEnumerator Idle() {
@@ -567,49 +583,113 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     IEnumerator Eat() {
+        GameManager.busy = true;
+
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
         float petSpeed = GameManager.animator.GetFloat("speed");
         GameManager.animator.SetFloat("speed", 0);
         GameObject foodBowl = GameObject.Find("Food Bowl");
         Vector3 bowlPos = foodBowl.transform.position;
+
+        // Play eating animation
         GameManager.animator.SetBool("is_eating", true);
+        // Move dog
         playerPet.transform.position = new Vector3(bowlPos.x + 1, bowlPos.y - (float)0.5, petPos.z);
         yield return new WaitForSecondsRealtime(4);
-        GameManager.animator.SetFloat("speed", petSpeed);
+
+        // Stop eating, reset position and speed
         GameManager.animator.SetBool("is_eating", false);
-        
+        GameManager.animator.SetFloat("speed", petSpeed);
         playerPet.transform.position = petPos;
+
+        GameManager.busy = false;
     }
 
     IEnumerator Drink() {
+        GameManager.busy = true;
+
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
         // float petSpeed = GameManager.animator.GetFloat("speed");
         GameManager.animator.SetFloat("speed", 0);
         GameObject waterBowl = GameObject.Find("Water Bowl");
         Vector3 bowlPos = waterBowl.transform.position;
+
+        // Play eating animation
         GameManager.animator.SetBool("is_drinking", true);
+        // Move dog
         playerPet.transform.position = new Vector3(bowlPos.x + 1, bowlPos.y - (float)0.5, petPos.z);
         yield return new WaitForSecondsRealtime(4);
         // GameManager.animator.SetFloat("speed", petSpeed);
+
+        // Stop drinking, reset position
         GameManager.animator.SetBool("is_drinking", false);
-        
         playerPet.transform.position = petPos;
+
+        GameManager.busy = false;
     }
 
     IEnumerator Sleep() {
+        GameManager.busy = true;
+
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
         GameManager.animator.SetFloat("speed", 0);
         GameObject dogBed = GameObject.Find("Dog Bed");
         Vector3 bedPos = dogBed.transform.position;
+
+        // Play sleeping animation
         GameManager.animator.SetBool("is_sleeping", true);
+        // Move dog
         playerPet.transform.position = new Vector3(bedPos.x, bedPos.y - (float)0.1, playerPet.transform.position.z);
         yield return new WaitForSecondsRealtime(4);
+
+        // Stop sleeping and reset position
         GameManager.animator.SetBool("is_sleeping", false);
-        
         playerPet.transform.position = petPos;
+
+        GameManager.busy = false;
+    }
+
+    IEnumerator Bathe() {
+        GameManager.busy = true;
+
+        GameObject playerPet = GameManager.playerPet;
+        Vector3 petPos = playerPet.transform.position;
+        GameManager.animator.SetFloat("speed", 0);
+        GameObject bathtub = GameObject.Find("Bathtub");
+        Vector3 bathpos = bathtub.transform.position;
+
+        // Move dog
+        playerPet.transform.position = new Vector3(bathpos.x, bathpos.y + (float) 0.1, bathpos.z - 1);
+        // Play jumping animation
+        GameManager.animator.SetBool("is_jumping", true);
+        yield return new WaitForSecondsRealtime((float)1);
+        // Stop jumping and reset position
+        GameManager.animator.SetBool("is_jumping", false);
+        // Wait a bit more
+        yield return new WaitForSecondsRealtime((float)1);
+        // Reset position
+        playerPet.transform.position = petPos;
+
+        GameManager.busy = false;
+    }
+
+    IEnumerator Jump() {
+        GameManager.busy = true;
+
+        GameObject playerPet = GameManager.playerPet;
+        GameManager.animator.SetFloat("speed", 0);
+
+        // Play jumping animation
+        GameManager.animator.SetBool("is_jumping", true);
+        yield return new WaitForSecondsRealtime((float) 1.25);
+
+        // Stop jumping and reset position
+        GameManager.animator.SetBool("is_jumping", false);
+
+        GameManager.busy = false;
     }
 
     public void Alert() {

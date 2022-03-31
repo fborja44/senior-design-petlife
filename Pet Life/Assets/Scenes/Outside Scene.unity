@@ -1822,7 +1822,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1263834127}
         m_TargetAssemblyTypeName: DogNeedsUpdate, Assembly-CSharp
         m_MethodName: giveTreat
         m_Mode: 1
@@ -2013,7 +2013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703939182558, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703939182558, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2081,7 +2081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703939182558, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -115.000046
+      value: -115.00003
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703939182558, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3115,6 +3115,10 @@ PrefabInstance:
     - target: {fileID: 2990223444123557578, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1263834127}
+    - target: {fileID: 2990223444123557578, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Speak
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444123557579, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3159,6 +3163,10 @@ PrefabInstance:
     - target: {fileID: 2990223444393583927, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1263834127}
+    - target: {fileID: 2990223444393583927, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Lay
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041474, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_Name
@@ -3178,7 +3186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041477, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041477, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3303,6 +3311,10 @@ PrefabInstance:
     - target: {fileID: 2990223444921817585, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1263834127}
+    - target: {fileID: 2990223444921817585, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fetch
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444921817598, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3357,12 +3369,32 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1263834127}
+    - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DogNeedsUpdate, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2990223445540893680, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1263834127}
+    - target: {fileID: 2990223445540893680, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Roll
       objectReference: {fileID: 0}
     - target: {fileID: 2990223445540893681, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3469,12 +3501,12 @@ MonoBehaviour:
   loveBar: {fileID: 394108853}
   bladderBar: {fileID: 1725927542}
   hygieneBar: {fileID: 1224893091}
-  treatButton: {fileID: 0}
-  sitBar: {fileID: 0}
-  layBar: {fileID: 0}
-  rollBar: {fileID: 0}
-  fetchBar: {fileID: 0}
-  speakBar: {fileID: 0}
+  treatButton: {fileID: 816546205}
+  sitBar: {fileID: 938057356}
+  layBar: {fileID: 87313635}
+  rollBar: {fileID: 2119528298}
+  fetchBar: {fileID: 460999520}
+  speakBar: {fileID: 2008132436}
   alert: {fileID: 700273502}
   min: 0
 --- !u!4 &1263834128
@@ -4187,7 +4219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2652896855355672216, guid: ed13e3d28b8560140b6e83d23f055912, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2652896855355672216, guid: ed13e3d28b8560140b6e83d23f055912, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4259,7 +4291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2652896855355672216, guid: ed13e3d28b8560140b6e83d23f055912, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -33.005013
+      value: -33.005005
       objectReference: {fileID: 0}
     - target: {fileID: 2652896855355672216, guid: ed13e3d28b8560140b6e83d23f055912, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

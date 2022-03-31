@@ -5477,12 +5477,12 @@ MonoBehaviour:
   loveBar: {fileID: 848853765}
   bladderBar: {fileID: 276336183}
   hygieneBar: {fileID: 1498903127}
-  treatButton: {fileID: 0}
-  sitBar: {fileID: 0}
-  layBar: {fileID: 0}
-  rollBar: {fileID: 0}
-  fetchBar: {fileID: 0}
-  speakBar: {fileID: 0}
+  treatButton: {fileID: 1750605291}
+  sitBar: {fileID: 343523068}
+  layBar: {fileID: 1275154514}
+  rollBar: {fileID: 1041291563}
+  fetchBar: {fileID: 343523067}
+  speakBar: {fileID: 1688124270}
   alert: {fileID: 999988263}
   min: 0
 --- !u!4 &1254984522
@@ -5743,6 +5743,10 @@ PrefabInstance:
     - target: {fileID: 2990223444123557578, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1254984521}
+    - target: {fileID: 2990223444123557578, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Speak
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444123557579, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5787,6 +5791,10 @@ PrefabInstance:
     - target: {fileID: 2990223444393583927, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1254984521}
+    - target: {fileID: 2990223444393583927, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Lay
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041474, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_Name
@@ -5931,6 +5939,10 @@ PrefabInstance:
     - target: {fileID: 2990223444921817585, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1254984521}
+    - target: {fileID: 2990223444921817585, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fetch
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444921817598, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5987,10 +5999,18 @@ PrefabInstance:
     - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1254984521}
+    - target: {fileID: 2990223445124684027, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sit
       objectReference: {fileID: 0}
     - target: {fileID: 2990223445540893680, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1254984521}
+    - target: {fileID: 2990223445540893680, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Roll
       objectReference: {fileID: 0}
     - target: {fileID: 2990223445540893681, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7389,7 +7409,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1254984521}
         m_TargetAssemblyTypeName: DogNeedsUpdate, Assembly-CSharp
         m_MethodName: giveTreat
         m_Mode: 1

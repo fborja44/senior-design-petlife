@@ -9,12 +9,23 @@ public class EventPops : MonoBehaviour
     public GameObject popUpBox;
     public Animator animator;
     public TMP_Text popUpText;
+    public TextMeshProUGUI popupGUI;
+    
+    private void Awake()
+    {
+        PopUp("hello");
+    }
 
     public void PopUp(string text)
     {
         popUpBox.SetActive(true);
+        Debug.Log("box active");
         popUpText.text = text;
+        popupGUI.text = text;
+        Debug.Log("Text changed");
+
         animator.SetTrigger("pop");
+        Debug.Log("box popped");
     }
 }
     //public Image fill;

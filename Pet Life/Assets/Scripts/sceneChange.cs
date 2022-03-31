@@ -9,6 +9,7 @@ using Random = System.Random;
 public class sceneChange : MonoBehaviour
 {
     public string popUp;
+    public EventPops gameManager;
     public void startMainGame()
     {
         SceneManager.LoadScene("Difficulty Scene");
@@ -49,8 +50,9 @@ public class sceneChange : MonoBehaviour
         if (r < 10) // Chance that event pops up
         {
             Debug.Log("In loop");
-            EventPops pop = GameObject.FindGameObjectWithTag("GameManager").GetComponent<EventPops>();
-            print(GameObject.FindGameObjectWithTag("GameManager").GetComponent<EventPops>());
+            //EventPops pop = GameObject.FindGameObjectWithTag("GameManager").GetComponent<EventPops>();
+            //print(GameObject.FindGameObjectWithTag("GameManager").GetComponent<EventPops>());
+            EventPops pop = gameManager;
             pop.PopUp(popUp);
         }
     }

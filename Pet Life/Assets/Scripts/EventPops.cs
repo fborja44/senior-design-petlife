@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = System.Random;
 
 public class EventPops : MonoBehaviour
 {
@@ -13,7 +14,12 @@ public class EventPops : MonoBehaviour
     
     private void Awake()
     {
-        PopUp("hello");
+        Random rnd = new Random();
+        int r = rnd.Next(10);
+        if (r == 1) // Chance that event pops up
+        {
+            PopUp("hello");
+        }
     }
 
     public void PopUp(string text)

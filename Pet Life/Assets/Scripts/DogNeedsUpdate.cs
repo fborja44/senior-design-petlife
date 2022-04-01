@@ -99,6 +99,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseHunger(1);
             LoseThirst(2);
             LoseHygiene(1);
+            LoseLove(1);
         }
         sitBar.SetTrick(sitLevel);
         layBar.SetTrick(layLevel);
@@ -649,14 +650,53 @@ public class DogNeedsUpdate : MonoBehaviour
             FailedAction("Hunger", false);
         } else if (!CheckNeeds("Thirst", thirstLost, false)) {
             FailedAction("Thirst", false);
-        } else if (!CheckNeeds("Love", loveGained)) {
-            FailedAction("Love");
+        // } else if (!CheckNeeds("Love", loveGained)) {
+        //     FailedAction("Love");
         } else {
             StartCoroutine(SendAlert("Played some fetch with " + GameManager.petName + "!"));
             LoseEnergy(energyUsed);
             LoseHunger(hungerLost);
             LoseThirst(thirstLost);
             GainLove(loveGained);
+            GameManager.score += 100;
+        }
+    }
+
+    public void UseBrush() {
+        float hygieneGained = (float)(max * 0.25);
+        if (GameManager.busy) return; // busy doing another action
+        if (GainHygiene(hygieneGained)) {
+            StartCoroutine(SendAlert("Groomed " + GameManager.petName + "!"));
+            StartCoroutine(playJump());
+            GameManager.score += 100;
+        }
+    }
+
+    public void UsePuddle() {
+        float energyUsed = (float)(max * 0.2);
+        float hygieneLost = (float)(max * 0.4);
+        float hungerLost = (float)(max * 0.10);
+        float thirstLost = (float)(max * 0.10);
+        float loveGained = (float)(max * 0.10);
+        if (GameManager.busy) return; // busy doing another action
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else if (!CheckNeeds("Hygiene", hygieneLost, false)) {
+            FailedAction("Hygiene", false);
+        } else if (!CheckNeeds("Hunger", hungerLost, false)) {
+            FailedAction("Hunger", false);
+        } else if (!CheckNeeds("Thirst", thirstLost, false)) {
+            FailedAction("Thirst", false);
+        // } else if (!CheckNeeds("Love", loveGained)) {
+        //     FailedAction("Love");
+        } else {
+            LoseEnergy(energyUsed);
+            LoseHygiene(hygieneLost);
+            LoseHunger(hungerLost);
+            LoseThirst(thirstLost);
+            GainLove(loveGained);
+            StartCoroutine(SendAlert(GameManager.petName + " played in the puddle!"));
+            StartCoroutine(playPuddle());
             GameManager.score += 100;
         }
     }
@@ -774,7 +814,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
         // Play jumping animation
         GameManager.animator.SetBool("is_jumping", true);
-        yield return new WaitForSecondsRealtime((float) 1.25);
+        yield return new WaitForSecondsRealtime((float) 1.1);
 
         // Stop jumping and reset position
         GameManager.animator.SetBool("is_jumping", false);
@@ -794,6 +834,30 @@ public class DogNeedsUpdate : MonoBehaviour
 
         // Stop sleeping
         GameManager.animator.SetBool("is_sleeping", false);
+
+        GameManager.busy = false;
+    }
+
+    IEnumerator playPuddle() {
+        GameManager.busy = true;
+
+        GameObject playerPet = GameManager.playerPet;
+        Vector3 petPos = playerPet.transform.position;
+        GameManager.animator.SetFloat("speed", 0);
+        GameObject puddle = GameObject.Find("Puddle");
+        Vector3 puddlePos = puddle.transform.position;
+
+        // Move dog
+        playerPet.transform.position = new Vector3(puddlePos.x, puddlePos.y, playerPet.transform.position.z);
+
+        // Play jumping animation
+        GameManager.animator.SetBool("is_jumping", true);
+        yield return new WaitForSecondsRealtime((float) 1.25);
+
+        // Stop jumping
+        GameManager.animator.SetBool("is_jumping", false);
+        // Reset position
+        playerPet.transform.position = petPos;
 
         GameManager.busy = false;
     }

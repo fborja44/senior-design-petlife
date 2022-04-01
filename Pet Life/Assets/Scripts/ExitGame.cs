@@ -23,6 +23,7 @@ public class ExitGame : MonoBehaviour
 
     public void ExitDialogue() {
         dialogue.SetActive(true);
+        GameManager.busy = true;
         Time.timeScale = 0;
     }
 
@@ -36,6 +37,7 @@ public class ExitGame : MonoBehaviour
 
     public void CancelExit() {
         Time.timeScale = 1;
+        GameManager.busy = false;
         dialogue.SetActive(false);
     }
 }

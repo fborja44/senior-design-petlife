@@ -5,10 +5,13 @@ using UnityEngine.EventSystems;
 
 public class Tooltips : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    private GameManager gameManager;
     public GameObject tooltip;
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize vars
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         tooltip.SetActive(false);
     }
 
@@ -20,6 +23,7 @@ public class Tooltips : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData) {
         // Show text
+        if (GameManager.busy) return;
         tooltip.SetActive(true);
     }
 

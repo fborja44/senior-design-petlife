@@ -310,49 +310,71 @@ public class DogNeedsUpdate : MonoBehaviour
         if (lastTrickSuccess == true) {
             if (lastTrick == 1 & sitLevel < 10) {
                 sitLevel = sitLevel + 1;
-                Debug.Log("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel);
+                // Debug.Log("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel);
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel));
+                GameManager.score += 100;
             }
             if (lastTrick == 2 & layLevel < 10) {
                 layLevel = layLevel + 1;
-                Debug.Log("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel);
+                // Debug.Log("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel);
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel));
+                GameManager.score += 100;
             } 
             if (lastTrick == 3 & rollLevel < 10) {
                 rollLevel = rollLevel + 1;
-                Debug.Log("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel);
+                // Debug.Log("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel);
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel));
+                GameManager.score += 100;
             } 
             if (lastTrick == 4 & fetchLevel < 10) {
                 fetchLevel = fetchLevel + 1;
-                Debug.Log("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel);
+                // Debug.Log("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel);
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel));
+                GameManager.score += 100;
             } 
             if (lastTrick == 5 & speakLevel < 10) {
                 speakLevel = speakLevel + 1;
-                Debug.Log("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel);
+                // Debug.Log("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel);
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel));
+                GameManager.score += 100;
             }  
         }
         else {
             if (lastTrick == 1 & sitLevel > 1) {
                 sitLevel = sitLevel - 1;
-                Debug.Log("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel);
+                // Debug.Log("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel);
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel));
+                GameManager.score -= 100;
             }
             if (lastTrick == 2 & layLevel > 1) {
                 layLevel = layLevel - 1;
-                Debug.Log("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel);
+                // Debug.Log("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel);
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel));
+                GameManager.score -= 100;
             } 
             if (lastTrick == 3 & rollLevel > 1) {
                 rollLevel = rollLevel - 1;
-                Debug.Log("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel);
+                // Debug.Log("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel);
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel));
+                GameManager.score -= 100;
             } 
             if (lastTrick == 4 & fetchLevel > 1) {
                 fetchLevel = fetchLevel - 1;
-                Debug.Log("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel);
+                // Debug.Log("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel);
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel));
+                GameManager.score -= 100;
             } 
             if (lastTrick == 5 & speakLevel > 1) {
                 speakLevel = speakLevel - 1;
-                Debug.Log("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel);
+                // Debug.Log("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel);
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel));
+                GameManager.score -= 100;
             }  
         }
     }
     public void Sit(){
+        if (GameManager.busy) return; // busy doing another action
+
         int rand_num = Random.Range(1,10);
         lastTrick = 1;
         Debug.Log("Sit level is " + sitLevel + ", random number was " + rand_num);
@@ -381,14 +403,23 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void executeSit(){
         treatButton.interactable = true;
-        Debug.Log("Dog has executed Sit");
         float energyUsed = (float)(max * 0.05);
-        LoseEnergy(energyUsed);
         float hygieneUsed = (float)(max * 0.05);
-        LoseHygiene(hygieneUsed);
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else if (!CheckNeeds("Hygiene", hygieneUsed, false)) {
+            FailedAction("Hygiene", false);
+        } else {
+            LoseEnergy(energyUsed);
+            LoseHygiene(hygieneUsed);
+            StartCoroutine(SendAlert(GameManager.petName + " sat down!"));
+            // Debug.Log("Dog has executed Sit");
+        }
     }
 
     public void Lay(){
+        if (GameManager.busy) return; // busy doing another action
+
         lastTrick = 2;
         int rand_num = Random.Range(1,10);
         Debug.Log("Lay level is " + layLevel + ", random number was " + rand_num);
@@ -416,15 +447,25 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void executeLay(){
-        treatButton.interactable = true;
-        Debug.Log("Dog has executed Lay");
         float energyUsed = (float)(max * 0.05);
-        LoseEnergy(energyUsed);
         float hygieneUsed = (float)(max * 0.1);
-        LoseHygiene(hygieneUsed);
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else if (!CheckNeeds("Hygiene", hygieneUsed, false)) {
+            FailedAction("Hygiene", false);
+        } else {
+            treatButton.interactable = true;
+            LoseEnergy(energyUsed);
+            LoseHygiene(hygieneUsed);
+            StartCoroutine(playLay());
+            StartCoroutine(SendAlert(GameManager.petName + " laid down!"));
+            // Debug.Log("Dog has executed Lay");
+        }
     }
 
     public void Roll(){
+        if (GameManager.busy) return; // busy doing another action
+
         lastTrick = 3;
         int rand_num = Random.Range(1,10);
         Debug.Log("Roll level is " + rollLevel + ", random number was " + rand_num);
@@ -453,14 +494,23 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void executeRoll(){
         treatButton.interactable = true;
-        Debug.Log("Dog has executed Roll");
         float energyUsed = (float)(max * 0.08);
-        LoseEnergy(energyUsed);
         float hygieneUsed = (float)(max * 0.2);
-        LoseHygiene(hygieneUsed);
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else if (!CheckNeeds("Hygiene", hygieneUsed, false)) {
+            FailedAction("Hygiene", false);
+        } else {
+            LoseEnergy(energyUsed);
+            LoseHygiene(hygieneUsed);
+            StartCoroutine(SendAlert(GameManager.petName + " did a roll!"));
+            // Debug.Log("Dog has executed Roll");
+        }
     }
 
     public void Fetch(){
+        if (GameManager.busy) return; // busy doing another action
+
         lastTrick = 4;
         int rand_num = Random.Range(1,10);
         Debug.Log("Fetch level is " + fetchLevel + ", random number was " + rand_num);
@@ -489,16 +539,27 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void executeFetch() {
         treatButton.interactable = true;
-        Debug.Log("Dog has executed Fetch");
         float energyUsed = (float)(max * 0.15);
-        float thirstUsed = (float)(max * 0.1);
         float hygieneUsed = (float)(max * 0.1);
-        LoseEnergy(energyUsed);
-        LoseThirst(thirstUsed);
-        LoseHygiene(hygieneUsed);
+        float thirstUsed = (float)(max * 0.1);
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else if (!CheckNeeds("Hygiene", hygieneUsed, false)) {
+            FailedAction("Hygiene", false);
+        } else if (!CheckNeeds("Thirst", thirstUsed, false)) {
+            FailedAction("Thirst", false);
+        } else {
+            LoseEnergy(energyUsed);
+            LoseHygiene(hygieneUsed);
+            LoseThirst(thirstUsed);
+            StartCoroutine(SendAlert(GameManager.petName + " played fetch!"));
+            // Debug.Log("Dog has executed Fetch");
+        }
     }
 
     public void Speak(){
+        if (GameManager.busy) return; // busy doing another action
+
         lastTrick = 5;
         int rand_num = Random.Range(1,10);
         Debug.Log("Speak level is " + speakLevel + ", random number was " + rand_num);
@@ -526,9 +587,14 @@ public class DogNeedsUpdate : MonoBehaviour
     }
     public void executeSpeak(){
         treatButton.interactable = true;
-        Debug.Log("Dog has executed Speak");
         float energyUsed = (float)(max * 0.06);
-        LoseEnergy(energyUsed);
+        if (!CheckNeeds("Energy", energyUsed, false)) {
+            FailedAction("Energy", false);
+        } else {
+            LoseEnergy(energyUsed);
+            StartCoroutine(SendAlert(GameManager.petName + " barked at you!"));
+            // Debug.Log("Dog has executed Speak");
+        }
     }
 
     public void TakeBath() {
@@ -536,7 +602,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GameManager.busy) return; // busy doing another action
         if (GainHygiene(hygieneGained)) {
             StartCoroutine(SendAlert("Gave " + GameManager.petName + " a bath!"));
-            StartCoroutine(Bathe());
+            StartCoroutine(playBathe());
             GameManager.score += 100;
         }
     }
@@ -546,7 +612,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GameManager.busy) return; // busy doing another action
         if (GainHunger(hungerGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " ate some food!"));
-            StartCoroutine(Eat());
+            StartCoroutine(playEat());
             GameManager.score += 100;
         }
     }
@@ -556,7 +622,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GameManager.busy) return; // busy doing another action
         if (GainThirst(thirstGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " drank some water!"));
-            StartCoroutine(Drink());
+            StartCoroutine(playDrink());
             GameManager.score += 100;
         }
     }
@@ -566,7 +632,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GameManager.busy) return; // busy doing another action
         if (GainEnergy(energyGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " rested for a bit!"));
-            StartCoroutine(Sleep());
+            StartCoroutine(playSleep());
             GameManager.score += 100;
         }
     }
@@ -597,7 +663,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void UseJump() {
         if (GameManager.busy) return; // busy doing another action
-        StartCoroutine(Jump());
+        StartCoroutine(playJump());
     }
 
     IEnumerator Idle() {
@@ -606,7 +672,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetFloat("speed", 0);
     }
 
-    IEnumerator Eat() {
+    IEnumerator playEat() {
         GameManager.busy = true;
 
         GameObject playerPet = GameManager.playerPet;
@@ -630,7 +696,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.busy = false;
     }
 
-    IEnumerator Drink() {
+    IEnumerator playDrink() {
         GameManager.busy = true;
 
         GameObject playerPet = GameManager.playerPet;
@@ -654,7 +720,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.busy = false;
     }
 
-    IEnumerator Sleep() {
+    IEnumerator playSleep() {
         GameManager.busy = true;
 
         GameObject playerPet = GameManager.playerPet;
@@ -676,7 +742,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.busy = false;
     }
 
-    IEnumerator Bathe() {
+    IEnumerator playBathe() {
         GameManager.busy = true;
 
         GameObject playerPet = GameManager.playerPet;
@@ -700,7 +766,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.busy = false;
     }
 
-    IEnumerator Jump() {
+    IEnumerator playJump() {
         GameManager.busy = true;
 
         GameObject playerPet = GameManager.playerPet;
@@ -712,6 +778,22 @@ public class DogNeedsUpdate : MonoBehaviour
 
         // Stop jumping and reset position
         GameManager.animator.SetBool("is_jumping", false);
+
+        GameManager.busy = false;
+    }
+
+    IEnumerator playLay() {
+        GameManager.busy = true;
+
+        GameObject playerPet = GameManager.playerPet;
+        GameManager.animator.SetFloat("speed", 0);
+
+        // Play sleeping animation
+        GameManager.animator.SetBool("is_sleeping", true);
+        yield return new WaitForSecondsRealtime(4);
+
+        // Stop sleeping
+        GameManager.animator.SetBool("is_sleeping", false);
 
         GameManager.busy = false;
     }

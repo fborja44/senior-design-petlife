@@ -41,6 +41,9 @@ public class DogNeedsUpdate : MonoBehaviour
     float count = 0;
     public int min = 0;
 
+    private float time = 0.0f; 
+    public float period = 1f;   // 1 second period
+
     
     // Start is called before the first frame update
     void Start()
@@ -86,20 +89,23 @@ public class DogNeedsUpdate : MonoBehaviour
         } else {
             needsName.text = name + "'s Needs";
         }
+        // Start coroutine for bonus
+        StartCoroutine(BonusScore());
     }
 
     // Update is called once per frame
     void Update()
     {
         Alert();
-        count += 1;
-        if (count == 600 && !GameManager.busy){
-            count = 0;
+        time += Time.deltaTime;
+        if (time > period && !GameManager.busy){
+            time = time - period;
+            // Decay needs over time
             LoseEnergy(1);
             LoseHunger(1);
             LoseThirst(2);
             LoseHygiene(1);
-            LoseLove(1);
+            LoseLove(3);
         }
         sitBar.SetTrick(sitLevel);
         layBar.SetTrick(layLevel);
@@ -312,64 +318,74 @@ public class DogNeedsUpdate : MonoBehaviour
             if (lastTrick == 1 & sitLevel < 10) {
                 sitLevel = sitLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel);
-                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel));
-                GameManager.score += 100;
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to sit level. Sit Level is now " + sitLevel));
+                // Increment score
+                GameManager.incrementScore(100);
             }
             if (lastTrick == 2 & layLevel < 10) {
                 layLevel = layLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel);
-                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel));
-                GameManager.score += 100;
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to lay level. Lay Level is now " + layLevel));
+                // Increment score
+                GameManager.incrementScore(100);
             } 
             if (lastTrick == 3 & rollLevel < 10) {
                 rollLevel = rollLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel);
-                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel));
-                GameManager.score += 100;
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to roll level. Roll Level is now " + rollLevel));
+                // Increment score
+                GameManager.incrementScore(100);
             } 
             if (lastTrick == 4 & fetchLevel < 10) {
                 fetchLevel = fetchLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel);
-                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel));
-                GameManager.score += 100;
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now " + fetchLevel));
+                // Increment score
+                GameManager.incrementScore(100);
             } 
             if (lastTrick == 5 & speakLevel < 10) {
                 speakLevel = speakLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel);
-                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel));
-                GameManager.score += 100;
+                StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to speak level. Speak Level is now " + speakLevel));
+                // Increment score
+                GameManager.incrementScore(100);
             }  
         }
         else {
             if (lastTrick == 1 & sitLevel > 1) {
                 sitLevel = sitLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel);
-                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel));
-                GameManager.score -= 100;
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now " + sitLevel));
+                // Decrement score
+                GameManager.decrementScore(100);
             }
             if (lastTrick == 2 & layLevel > 1) {
                 layLevel = layLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel);
-                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel));
-                GameManager.score -= 100;
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now " + layLevel));
+                // Decrement score
+                GameManager.decrementScore(100);
             } 
             if (lastTrick == 3 & rollLevel > 1) {
                 rollLevel = rollLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel);
-                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel));
-                GameManager.score -= 100;
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now " + rollLevel));
+                // Decrement score
+                GameManager.decrementScore(100);
             } 
             if (lastTrick == 4 & fetchLevel > 1) {
                 fetchLevel = fetchLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel);
-                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel));
-                GameManager.score -= 100;
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now " + fetchLevel));
+                // Decrement score
+                GameManager.decrementScore(100);
             } 
             if (lastTrick == 5 & speakLevel > 1) {
                 speakLevel = speakLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel);
-                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel));
-                GameManager.score -= 100;
+                StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now " + speakLevel));
+                // Decrement score
+                GameManager.decrementScore(100);
             }  
         }
     }
@@ -604,7 +620,8 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GainHygiene(hygieneGained)) {
             StartCoroutine(SendAlert("Gave " + GameManager.petName + " a bath!"));
             StartCoroutine(playBathe());
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(100);
         }
     }
 
@@ -614,7 +631,8 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GainHunger(hungerGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " ate some food!"));
             StartCoroutine(playEat());
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(100);
         }
     }
 
@@ -624,7 +642,8 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GainThirst(thirstGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " drank some water!"));
             StartCoroutine(playDrink());
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(100);
         }
     }
 
@@ -634,7 +653,8 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GainEnergy(energyGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " rested for a bit!"));
             StartCoroutine(playSleep());
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(100);
         }
     }
 
@@ -650,15 +670,17 @@ public class DogNeedsUpdate : MonoBehaviour
             FailedAction("Hunger", false);
         } else if (!CheckNeeds("Thirst", thirstLost, false)) {
             FailedAction("Thirst", false);
-        // } else if (!CheckNeeds("Love", loveGained)) {
-        //     FailedAction("Love");
+        } else if (!CheckNeeds("Love", loveGained)) {
+            FailedAction("Love");
         } else {
             StartCoroutine(SendAlert("Played some fetch with " + GameManager.petName + "!"));
+            StartCoroutine(playJump());
             LoseEnergy(energyUsed);
             LoseHunger(hungerLost);
             LoseThirst(thirstLost);
             GainLove(loveGained);
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(100);
         }
     }
 
@@ -668,7 +690,8 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GainHygiene(hygieneGained)) {
             StartCoroutine(SendAlert("Groomed " + GameManager.petName + "!"));
             StartCoroutine(playJump());
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(100);
         }
     }
 
@@ -687,8 +710,8 @@ public class DogNeedsUpdate : MonoBehaviour
             FailedAction("Hunger", false);
         } else if (!CheckNeeds("Thirst", thirstLost, false)) {
             FailedAction("Thirst", false);
-        // } else if (!CheckNeeds("Love", loveGained)) {
-        //     FailedAction("Love");
+        } else if (!CheckNeeds("Love", loveGained)) {
+            FailedAction("Love");
         } else {
             LoseEnergy(energyUsed);
             LoseHygiene(hygieneLost);
@@ -697,7 +720,8 @@ public class DogNeedsUpdate : MonoBehaviour
             GainLove(loveGained);
             StartCoroutine(SendAlert(GameManager.petName + " played in the puddle!"));
             StartCoroutine(playPuddle());
-            GameManager.score += 100;
+            // Increment score
+            GameManager.incrementScore(50);
         }
     }
 
@@ -860,6 +884,41 @@ public class DogNeedsUpdate : MonoBehaviour
         playerPet.transform.position = petPos;
 
         GameManager.busy = false;
+    }
+
+    // Every 30 seconds, award bonus score per needs bar with > half
+    IEnumerator BonusScore() {
+        while (true) {
+            yield return new WaitForSeconds(30);
+            bool bonus = false;
+            if (currentBladder > max/2) {
+                GameManager.incrementScore(100);
+                bonus = true;
+            }
+            if (currentEnergy > max/2) {
+                GameManager.incrementScore(100);
+                bonus = true;
+            }
+            if (currentHunger > max/2) {
+                GameManager.incrementScore(100);
+                bonus = true;
+            }
+            if (currentHygiene > max/2) {
+                GameManager.incrementScore(200);
+                bonus = true;
+            }
+            if (currentLove > max/4) {
+                GameManager.incrementScore(200);
+                bonus = true;
+            }
+            if (currentThirst > max/2) {
+                GameManager.incrementScore(200);
+                bonus = true;
+            }
+            if (bonus) {
+                StartCoroutine(SendAlert("Awarded bonus points for taking care of " + GameManager.petName + ". Keep it up!"));
+            }
+        }
     }
 
     public void Alert() {

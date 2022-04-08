@@ -1788,6 +1788,22 @@ PrefabInstance:
       propertyPath: m_Text
       value: Trick Levels
       objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4744423704297176255, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000029564
@@ -4732,9 +4748,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1254984521}
         m_TargetAssemblyTypeName: DogNeedsUpdate, Assembly-CSharp
-        m_MethodName: UseBall
+        m_MethodName: UseBrush
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6085,6 +6101,7 @@ MonoBehaviour:
   speakBar: {fileID: 1688124270}
   alert: {fileID: 999988263}
   min: 0
+  period: 1
 --- !u!4 &1254984522
 Transform:
   m_ObjectHideFlags: 0

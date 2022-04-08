@@ -2783,6 +2783,18 @@ PrefabInstance:
       propertyPath: m_Text
       value: Trick Levels
       objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4744423704297176255, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000029564
@@ -3863,6 +3875,7 @@ MonoBehaviour:
   speakBar: {fileID: 668813267}
   alert: {fileID: 1529216815}
   min: 0
+  period: 1
 --- !u!4 &1263834128
 Transform:
   m_ObjectHideFlags: 0

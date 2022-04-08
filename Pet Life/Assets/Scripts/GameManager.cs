@@ -14,14 +14,19 @@ public class GameManager : MonoBehaviour
     public GameObject defaultPet;
     public GameObject[] petPrefabs;
     public static Animator animator;        // Animator for pet
-    public static int score = 0;            // Player score
     public static bool busy = false;        // Keeps track of whether an action is being performed
                                             // or game is paused
     private GameManager gameManager;
+    private static int score = 0;           // Player score
+    public static int highscore = 0;       // High score
 
     // Start is called before the first frame update
     void Start()
     {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Title Scene") {
+            GameObject.Find("High Score").gameObject.GetComponent<TextMeshProUGUI>().text = "High Score: " + highscore;
+        }
         SpawnPet();
     }
 
@@ -32,11 +37,6 @@ public class GameManager : MonoBehaviour
             GameObject scoreText = GameObject.Find("Score");
             scoreText.transform.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
         } catch { /* Do nothing */ }
-    }
-
-    // Changes scene to title screen
-    public void ToTitle() {
-        SceneManager.LoadScene("Title Scene");
     }
 
     // Instantiates Pet if on Gameplay screen
@@ -56,6 +56,32 @@ public class GameManager : MonoBehaviour
             playerPet.name = "Player Pet";
             playerObject = playerPet.transform.GetChild(0);
             animator = playerObject.GetComponent<Animator>();
+        } else {
+            if (GameObject.Find("Player Pet")) {
+                Destroy(GameObject.Find("Player Pet"));
+            }
         }
+    }
+
+    // Returns the current game score
+    public static int getScore() {
+        return score;
+    }
+
+    // Resets the score to 0. Returns the value of the score before the reset.
+    public static int resetScore() {
+        int prevScore = score;
+        score = 0;
+        return prevScore;
+    }
+
+    // Increments the score by value
+    public static void incrementScore(int value) {
+        score += value;
+    }
+
+    // Decrements score by value. Lowest valid score value is 0.
+    public static void decrementScore(int value) {
+        score = Mathf.Max(0, score - value);
     }
 }

@@ -32,6 +32,9 @@ public class ExitGame : MonoBehaviour
         dogNeedsUpdate.ResetNeeds();
 
         Time.timeScale = 1;
+        GameManager.busy = false;
+        // Reset score and update high score
+        GameManager.highscore = GameManager.resetScore();
         SceneManager.LoadScene("Title Scene");
     }
 

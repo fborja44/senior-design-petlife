@@ -1001,7 +1001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041474, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2990223444455041477, guid: 1234bf90197ae1e4f817c5f52d1b04d5, type: 3}
       propertyPath: m_Pivot.x
@@ -2771,7 +2771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703360737114, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703525207809, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_Value
@@ -2864,6 +2864,10 @@ PrefabInstance:
     - target: {fileID: 4744423703939182557, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_Name
       value: Trick Levels Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744423703939182557, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703939182558, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_Pivot.x
@@ -2979,7 +2983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423703973733028, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4744423704108225944, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3011,7 +3015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423704274521475, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4744423704297176248, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_Text
@@ -3111,7 +3115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423704652752978, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4744423704657550914, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_Name
@@ -3163,7 +3167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4744423704930221875, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4744423704108225945, guid: 138540bf905c6a444bb8ab93240a9eab, type: 3}
@@ -4555,6 +4559,10 @@ PrefabInstance:
       propertyPath: trainingPanel
       value: 
       objectReference: {fileID: 282789060}
+    - target: {fileID: 2652896855355672212, guid: ed13e3d28b8560140b6e83d23f055912, type: 3}
+      propertyPath: trainingLevels
+      value: 
+      objectReference: {fileID: 853256547}
     - target: {fileID: 2652896855355672216, guid: ed13e3d28b8560140b6e83d23f055912, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

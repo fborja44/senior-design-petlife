@@ -105,7 +105,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseHunger(1);
             LoseThirst(2);
             LoseHygiene(1);
-            LoseLove(3);
+            LoseLove(1);
         }
         sitBar.SetTrick(sitLevel);
         layBar.SetTrick(layLevel);
@@ -340,35 +340,35 @@ public class DogNeedsUpdate : MonoBehaviour
                 // Debug.Log("Treat given succesfully. Adding 1 to sit level. Sit Level is now" + sitLevel);
                 StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to sit level. Sit Level is now " + sitLevel));
                 // Increment score
-                GameManager.incrementScore(100);
+                GameManager.incrementScore(100 * sitLevel);
             }
             if (lastTrick == 2 & layLevel < 10) {
                 layLevel = layLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to lay level. Lay Level is now" + layLevel);
                 StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to lay level. Lay Level is now " + layLevel));
                 // Increment score
-                GameManager.incrementScore(100);
+                GameManager.incrementScore(100 * layLevel);
             } 
             if (lastTrick == 3 & rollLevel < 10) {
                 rollLevel = rollLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to roll level. Roll Level is now" + rollLevel);
                 StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to roll level. Roll Level is now " + rollLevel));
                 // Increment score
-                GameManager.incrementScore(100);
+                GameManager.incrementScore(100 * rollLevel);
             } 
             if (lastTrick == 4 & fetchLevel < 10) {
                 fetchLevel = fetchLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now" + fetchLevel);
                 StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to fetch level. Fetch Level is now " + fetchLevel));
                 // Increment score
-                GameManager.incrementScore(100);
+                GameManager.incrementScore(100 * fetchLevel);
             } 
             if (lastTrick == 5 & speakLevel < 10) {
                 speakLevel = speakLevel + 1;
                 // Debug.Log("Treat given succesfully. Adding 1 to speak level. Speak Level is now" + speakLevel);
                 StartCoroutine(SendAlert("Treat given succesfully. Adding 1 to speak level. Speak Level is now " + speakLevel));
                 // Increment score
-                GameManager.incrementScore(100);
+                GameManager.incrementScore(100 * speakLevel);
             }  
         }
         else {
@@ -377,35 +377,35 @@ public class DogNeedsUpdate : MonoBehaviour
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now" + sitLevel);
                 StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from sit level. Sit Level is now " + sitLevel));
                 // Decrement score
-                GameManager.decrementScore(100);
+                GameManager.decrementScore(100 * sitLevel);
             }
             if (lastTrick == 2 & layLevel > 1) {
                 layLevel = layLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now" + layLevel);
                 StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from lay level. Lay Level is now " + layLevel));
                 // Decrement score
-                GameManager.decrementScore(100);
+                GameManager.decrementScore(100 * layLevel);
             } 
             if (lastTrick == 3 & rollLevel > 1) {
                 rollLevel = rollLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now" + rollLevel);
                 StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from roll level. Roll Level is now " + rollLevel));
                 // Decrement score
-                GameManager.decrementScore(100);
+                GameManager.decrementScore(100 * rollLevel);
             } 
             if (lastTrick == 4 & fetchLevel > 1) {
                 fetchLevel = fetchLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now" + fetchLevel);
                 StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from fetch level. Fetch Level is now " + fetchLevel));
                 // Decrement score
-                GameManager.decrementScore(100);
+                GameManager.decrementScore(100 * fetchLevel);
             } 
             if (lastTrick == 5 & speakLevel > 1) {
                 speakLevel = speakLevel - 1;
                 // Debug.Log("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now" + speakLevel);
                 StartCoroutine(SendAlert("Treat given for incorrect trick. Removing 1 from speak level. Speak Level is now " + speakLevel));
                 // Decrement score
-                GameManager.decrementScore(100);
+                GameManager.decrementScore(100 * speakLevel);
             }  
         }
     }

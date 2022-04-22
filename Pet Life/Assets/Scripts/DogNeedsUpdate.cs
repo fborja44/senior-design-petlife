@@ -662,6 +662,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GainThirst(thirstGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " drank some water!"));
             StartCoroutine(playDrink());
+            StartCoroutine(DelayLoseBladder());
             // Increment score
             GameManager.incrementScore(100);
         }
@@ -748,6 +749,16 @@ public class DogNeedsUpdate : MonoBehaviour
     public void UseJump() {
         if (GameManager.busy) return; // busy doing another action
         StartCoroutine(playJump());
+    }
+
+    public void UseBathroom() {
+        if (GameManager.busy) return;
+        float bladderGained = (float)(max * 0.5);
+        if (GainBladder(bladderGained)) {
+            StartCoroutine(SendAlert(GameManager.petName + " used the bathroom!"));
+            // Increment score
+            GameManager.incrementScore(100);
+        }
     }
 
     IEnumerator Idle() {
@@ -1086,6 +1097,11 @@ public class DogNeedsUpdate : MonoBehaviour
         alertToggle = false;
         yield return new WaitForSeconds(10);
         alertToggle = true;
+    }
+
+    IEnumerator DelayLoseBladder() {
+        yield return new WaitForSeconds(15);
+        LoseBladder((float)(max * 0.25));
     }
 
     public void ResetNeeds() {

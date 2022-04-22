@@ -38,7 +38,7 @@ public class DogNeedsUpdate : MonoBehaviour
     public GameObject alert;
     private TextMeshProUGUI alertText;
     private bool alertToggle = true;
-    float count = 0;
+    //float count = 0;
     public int min = 0;
 
     private float time = 0.0f; 
@@ -219,32 +219,40 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainEnergy(float sleep) {
-        float newEnergy = currentEnergy + sleep;
+    bool GainEnergy(float energyGain) {
+        float newEnergy = currentEnergy + energyGain;
         if (newEnergy <= max) {
-            currentEnergy = Mathf.Min(newEnergy, max);
+            currentEnergy = newEnergy;
             energyBar.SetNeeds(currentEnergy);
             return true;
-        } else {
+        } else if (currentEnergy == max) {
             // Display warning
             FailedAction("Energy");
             return false;
+        } else  {
+            currentEnergy = max;
+            energyBar.SetNeeds(currentEnergy);
+            return true;
         }
     }
 
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainBladder(float bladderGain){
+    bool GainBladder(float bladderGain) {
         float newBladder = currentBladder + bladderGain;
         if (newBladder <= max) {
-            currentBladder = Mathf.Min(newBladder, max);
+            currentBladder = newBladder;
             bladderBar.SetNeeds(currentBladder);
             return true;
-        } else {
+        } else if (currentBladder == max) {
             // Display warning
             FailedAction("Bladder");
             return false;
+        } else  {
+            currentBladder = max;
+            bladderBar.SetNeeds(currentBladder);
+            return true;
         }
     }
 
@@ -254,15 +262,20 @@ public class DogNeedsUpdate : MonoBehaviour
     bool GainHunger(float hungerGain) {
         float newHunger = currentHunger + hungerGain;
         if (newHunger <= max) {
-            currentHunger = Mathf.Min(newHunger, max);
+            currentHunger = newHunger;
             hungerBar.SetNeeds(currentHunger);
             return true;
-        } else {
+        } else if (currentHunger == max) {
             // Display warning
             FailedAction("Hunger");
             return false;
+        } else  {
+            currentHunger = max;
+            hungerBar.SetNeeds(currentHunger);
+            return true;
         }
     }
+
 
     /**
      * Returns true if successful, false otherwise
@@ -270,13 +283,17 @@ public class DogNeedsUpdate : MonoBehaviour
     bool GainThirst(float thirstGain) {
         float newThirst = currentThirst + thirstGain;
         if (newThirst <= max) {
-            currentThirst = Mathf.Min(newThirst, max);
-            thirstBar.SetNeeds(thirstGain);
+            currentThirst = newThirst;
+            thirstBar.SetNeeds(currentThirst);
             return true;
-        } else {
+        } else if (currentThirst == max) {
             // Display warning
             FailedAction("Thirst");
             return false;
+        } else  {
+            currentThirst = max;
+            thirstBar.SetNeeds(currentThirst);
+            return true;
         }
     }
 
@@ -286,13 +303,17 @@ public class DogNeedsUpdate : MonoBehaviour
     bool GainHygiene(float hygieneGain) {
         float newHygiene = currentHygiene + hygieneGain;
         if (newHygiene <= max) {
-            currentHygiene = Mathf.Min(newHygiene, max);
+            currentHygiene = newHygiene;
             hygieneBar.SetNeeds(currentHygiene);
             return true;
-        } else {
+        } else if (currentHygiene == max) {
             // Display warning
             FailedAction("Hygiene");
             return false;
+        } else  {
+            currentHygiene = max;
+            hygieneBar.SetNeeds(currentHygiene);
+            return true;
         }
     }
 
@@ -302,13 +323,12 @@ public class DogNeedsUpdate : MonoBehaviour
     bool GainLove(float loveGain){
         float newLove = currentLove + loveGain;
         if (newLove <= max/2) {
-            currentLove = Mathf.Min(newLove, max/2);
+            currentLove = newLove;
             loveBar.SetNeeds(currentLove);
             return true;
         } else {
-            // Display warning
-            FailedAction("Love");
-            return false;
+            currentLove = max/2;
+            return true;
         }
     }
 
@@ -1038,6 +1058,7 @@ public class DogNeedsUpdate : MonoBehaviour
      */
     public void FailedAction(string need, bool gain = true) {
         string name = GameManager.petName;
+        lastTrickSuccess = false;
         if (!gain) {
             if (name.ToLower()[name.Length - 1] == 's') {
                 StartCoroutine(SendAlert(name + "' " + need + " is too low!"));

@@ -23,6 +23,7 @@ public class ExitGame : MonoBehaviour
 
     public void ExitDialogue() {
         dialogue.SetActive(true);
+        GameManager.ToggleBusy();
         Time.timeScale = 0;
     }
 
@@ -31,11 +32,15 @@ public class ExitGame : MonoBehaviour
         dogNeedsUpdate.ResetNeeds();
 
         Time.timeScale = 1;
+        GameManager.ToggleBusy();
+        // Reset score and update high score
+        GameManager.highscore = GameManager.resetScore();
         SceneManager.LoadScene("Title Scene");
     }
 
     public void CancelExit() {
         Time.timeScale = 1;
+        GameManager.ToggleBusy();
         dialogue.SetActive(false);
     }
 }

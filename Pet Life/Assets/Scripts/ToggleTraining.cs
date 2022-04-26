@@ -7,6 +7,7 @@ public class ToggleTraining : MonoBehaviour
 {
     private Button button;
     public GameObject trainingPanel;
+    public GameObject trainingLevels;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +16,8 @@ public class ToggleTraining : MonoBehaviour
         button.onClick.AddListener(Toggle);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void Toggle() {
         trainingPanel.SetActive(!trainingPanel.activeInHierarchy);
+        trainingLevels.SetActive(!trainingLevels.activeInHierarchy);
     }
 }

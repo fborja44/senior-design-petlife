@@ -6,7 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
     private GameManager gameManager;
     private float speed = 1f;
-    private int direction; // -1 = left, 1 = right
+    private static int direction = -1; // -1 = left, 1 = right
     private float idlePauseTime;
 
     // Start is called before the first frame update
@@ -14,15 +14,14 @@ public class CharacterMovement : MonoBehaviour
     {
         // Initialize vars
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        direction = -1;
         idlePauseTime = Random.Range(3, 10);
         StartCoroutine(Idle());
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
-        if (!(GameManager.animator.GetBool("is_eating") || GameManager.animator.GetBool("is_drinking") || GameManager.animator.GetBool("is_sleeping"))) { // only move if not in another animation
+        if (!(GameManager.animator.GetBool("is_eating") || GameManager.animator.GetBool("is_drinking") || GameManager.animator.GetBool("is_sleeping") || GameManager.animator.GetBool("is_jumping") || GameManager.isBusy())) { // only move if not in another animation
             if (Time.time > idlePauseTime) {
                 StartCoroutine(Idle());
                 idlePauseTime = Time.time + Random.Range(3, 10);

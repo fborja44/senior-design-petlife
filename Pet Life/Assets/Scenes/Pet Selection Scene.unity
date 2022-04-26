@@ -283,8 +283,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 204306439}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 204306441}
+        m_TargetAssemblyTypeName: sceneChange, Assembly-CSharp
         m_MethodName: ToTitle
         m_Mode: 1
         m_Arguments:
@@ -478,6 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 204306440}
   - component: {fileID: 204306439}
+  - component: {fileID: 204306441}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -499,6 +500,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPet: {fileID: 0}
   petPrefabs: []
+  cursorDefault: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
+  cursorWait: {fileID: 0}
+  cursorSelect: {fileID: 0}
+  cursorDoor: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!4 &204306440
 Transform:
   m_ObjectHideFlags: 0
@@ -514,6 +521,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &204306441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204306438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bcfab968c13d64aa1b49efcda3889d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &212306509
 GameObject:
   m_ObjectHideFlags: 0

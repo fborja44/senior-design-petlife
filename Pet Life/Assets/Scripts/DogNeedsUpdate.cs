@@ -98,7 +98,7 @@ public class DogNeedsUpdate : MonoBehaviour
     {
         Alert();
         time += Time.deltaTime;
-        if (time > period && !GameManager.busy){
+        if (time > period && !GameManager.isBusy()){
             time = time - period;
             // Decay needs over time
             LoseEnergy(1);
@@ -410,7 +410,7 @@ public class DogNeedsUpdate : MonoBehaviour
         }
     }
     public void Sit(){
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
 
         int rand_num = Random.Range(1,10);
         lastTrick = 1;
@@ -455,7 +455,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Lay(){
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
 
         lastTrick = 2;
         int rand_num = Random.Range(1,10);
@@ -501,7 +501,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Roll(){
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
 
         lastTrick = 3;
         int rand_num = Random.Range(1,10);
@@ -546,7 +546,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Fetch(){
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
 
         lastTrick = 4;
         int rand_num = Random.Range(1,10);
@@ -595,7 +595,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void Speak(){
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
 
         lastTrick = 5;
         int rand_num = Random.Range(1,10);
@@ -636,7 +636,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void TakeBath() {
         float hygieneGained = (float)(max * 0.5);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (GainHygiene(hygieneGained)) {
             StartCoroutine(SendAlert("Gave " + GameManager.petName + " a bath!"));
             StartCoroutine(playBathe());
@@ -647,7 +647,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void EatFood() {
         float hungerGained = (float)(max * 0.5);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (GainHunger(hungerGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " ate some food!"));
             StartCoroutine(playEat());
@@ -658,7 +658,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void DrinkWater() {
         float thirstGained = (float)(max * 0.5);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (GainThirst(thirstGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " drank some water!"));
             StartCoroutine(playDrink());
@@ -670,7 +670,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void Rest() {
         float energyGained = (float)(max * 0.5);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (GainEnergy(energyGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " rested for a bit!"));
             StartCoroutine(playSleep());
@@ -684,7 +684,7 @@ public class DogNeedsUpdate : MonoBehaviour
         float hungerLost = (float)(max * 0.18);
         float thirstLost = (float)(max * 0.18);
         float loveGained = (float)(max * 0.15);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (!CheckNeeds("Energy", energyUsed, false)) {
             FailedAction("Energy", false);
         } else if (!CheckNeeds("Hunger", hungerLost, false)) {
@@ -707,7 +707,7 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public void UseBrush() {
         float hygieneGained = (float)(max * 0.25);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (GainHygiene(hygieneGained)) {
             StartCoroutine(SendAlert("Groomed " + GameManager.petName + "!"));
             StartCoroutine(playJump());
@@ -722,7 +722,7 @@ public class DogNeedsUpdate : MonoBehaviour
         float hungerLost = (float)(max * 0.10);
         float thirstLost = (float)(max * 0.10);
         float loveGained = (float)(max * 0.10);
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         if (!CheckNeeds("Energy", energyUsed, false)) {
             FailedAction("Energy", false);
         } else if (!CheckNeeds("Hygiene", hygieneLost, false)) {
@@ -747,12 +747,12 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     public void UseJump() {
-        if (GameManager.busy) return; // busy doing another action
+        if (GameManager.isBusy()) return; // busy doing another action
         StartCoroutine(playJump());
     }
 
     public void UseBathroom() {
-        if (GameManager.busy) return;
+        if (GameManager.isBusy()) return;
         float bladderGained = (float)(max * 0.5);
         if (GainBladder(bladderGained)) {
             StartCoroutine(SendAlert(GameManager.petName + " used the bathroom!"));
@@ -768,7 +768,7 @@ public class DogNeedsUpdate : MonoBehaviour
     }
 
     IEnumerator playEat() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
@@ -788,11 +788,11 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetFloat("speed", petSpeed);
         playerPet.transform.position = petPos;
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     IEnumerator playDrink() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
@@ -812,11 +812,11 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetBool("is_drinking", false);
         playerPet.transform.position = petPos;
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     IEnumerator playSleep() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
@@ -834,11 +834,11 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetBool("is_sleeping", false);
         playerPet.transform.position = petPos;
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     IEnumerator playBathe() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
@@ -858,11 +858,11 @@ public class DogNeedsUpdate : MonoBehaviour
         // Reset position
         playerPet.transform.position = petPos;
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     IEnumerator playJump() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         GameManager.animator.SetFloat("speed", 0);
@@ -874,11 +874,11 @@ public class DogNeedsUpdate : MonoBehaviour
         // Stop jumping and reset position
         GameManager.animator.SetBool("is_jumping", false);
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     IEnumerator playLay() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         GameManager.animator.SetFloat("speed", 0);
@@ -890,11 +890,11 @@ public class DogNeedsUpdate : MonoBehaviour
         // Stop sleeping
         GameManager.animator.SetBool("is_sleeping", false);
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     IEnumerator playPuddle() {
-        GameManager.busy = true;
+        GameManager.ToggleBusy();
 
         GameObject playerPet = GameManager.playerPet;
         Vector3 petPos = playerPet.transform.position;
@@ -914,7 +914,7 @@ public class DogNeedsUpdate : MonoBehaviour
         // Reset position
         playerPet.transform.position = petPos;
 
-        GameManager.busy = false;
+        GameManager.ToggleBusy();
     }
 
     // Every 30 seconds, award bonus score per needs bar with > half

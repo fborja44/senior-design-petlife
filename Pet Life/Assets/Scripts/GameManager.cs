@@ -14,11 +14,18 @@ public class GameManager : MonoBehaviour
     public GameObject defaultPet;
     public GameObject[] petPrefabs;
     public static Animator animator;        // Animator for pet
-    public static bool busy = false;        // Keeps track of whether an action is being performed
+    private static bool busy = false;        // Keeps track of whether an action is being performed
                                             // or game is paused
     private GameManager gameManager;
     private static int score = 0;           // Player score
     public static int highscore = 0;       // High score
+
+    public Texture2D cursorDefault;
+    public Texture2D cursorWait;
+    public Texture2D cursorSelect;
+    public Texture2D cursorDoor;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +35,9 @@ public class GameManager : MonoBehaviour
             GameObject.Find("High Score").gameObject.GetComponent<TextMeshProUGUI>().text = "High Score: " + highscore;
         }
         SpawnPet();
+
+        // Set cursor
+        Cursor.SetCursor(cursorDefault, hotSpot, cursorMode);
     }
 
     // Update is called once per frame
@@ -37,6 +47,15 @@ public class GameManager : MonoBehaviour
             GameObject scoreText = GameObject.Find("Score");
             scoreText.transform.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
         } catch { /* Do nothing */ }
+    }
+
+    public static bool ToggleBusy() {
+        busy = !busy;
+        return busy;
+    }
+
+    public static bool isBusy() {
+        return busy;
     }
 
     // Instantiates Pet if on Gameplay screen

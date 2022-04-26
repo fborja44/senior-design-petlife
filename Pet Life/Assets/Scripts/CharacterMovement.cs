@@ -21,7 +21,7 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     async void Update()
     {
-        if (!(GameManager.animator.GetBool("is_eating") || GameManager.animator.GetBool("is_drinking") || GameManager.animator.GetBool("is_sleeping") || GameManager.animator.GetBool("is_jumping") || GameManager.busy)) { // only move if not in another animation
+        if (!(GameManager.animator.GetBool("is_eating") || GameManager.animator.GetBool("is_drinking") || GameManager.animator.GetBool("is_sleeping") || GameManager.animator.GetBool("is_jumping") || GameManager.isBusy())) { // only move if not in another animation
             if (Time.time > idlePauseTime) {
                 StartCoroutine(Idle());
                 idlePauseTime = Time.time + Random.Range(3, 10);

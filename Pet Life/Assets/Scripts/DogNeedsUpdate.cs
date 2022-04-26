@@ -590,6 +590,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseHygiene(hygieneUsed);
             LoseThirst(thirstUsed);
             StartCoroutine(SendAlert(GameManager.petName + " played fetch!"));
+            StartCoroutine(playJump());
             // Debug.Log("Dog has executed Fetch");
         }
     }
@@ -630,6 +631,7 @@ public class DogNeedsUpdate : MonoBehaviour
         } else {
             LoseEnergy(energyUsed);
             StartCoroutine(SendAlert(GameManager.petName + " barked at you!"));
+            StartCoroutine(playSpeak());
             // Debug.Log("Dog has executed Speak");
         }
     }
@@ -917,10 +919,25 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.ToggleBusy();
     }
 
+    IEnumerator playSpeak() {
+        GameManager.ToggleBusy();
+
+        GameManager.animator.SetFloat("speed", 0);
+
+        // Play drinking ("barking") animation
+        GameManager.animator.SetBool("is_drinking", true);
+        yield return new WaitForSecondsRealtime((float) 0.5);
+
+        // Stop "barking"
+        GameManager.animator.SetBool("is_drinking", false);
+
+        GameManager.ToggleBusy();
+    }
+
     // Every 30 seconds, award bonus score per needs bar with > half
     IEnumerator BonusScore() {
         while (true) {
-            yield return new WaitForSeconds(30);
+            yield return new WaitForSeconds(60);
             bool bonus = false;
             if (currentBladder > max/2) {
                 GameManager.incrementScore(100);
@@ -994,7 +1011,7 @@ public class DogNeedsUpdate : MonoBehaviour
                         StartCoroutine(SendAlert(name + "'s " + need + " is getting low!"));
                     }
                 }
-                StartCoroutine(DisableAlert());
+                // StartCoroutine(DisableAlert());
                 return;
             }
         }
@@ -1083,20 +1100,24 @@ public class DogNeedsUpdate : MonoBehaviour
                 StartCoroutine(SendAlert(name + "'s " + need + " is too full!"));
             }
         }
-        StartCoroutine(DisableAlert());
+        // StartCoroutine(DisableAlert());
     }
 
     IEnumerator SendAlert(string text) {
         alertText.text = text;
         alert.SetActive(true);
         yield return new WaitForSeconds(5);
-        alert.SetActive(false);
+        // alert.SetActive(false);
     }
 
     IEnumerator DisableAlert() {
         alertToggle = false;
         yield return new WaitForSeconds(10);
         alertToggle = true;
+    }
+
+    public void CloseAlert() {
+        alert.SetActive(false);
     }
 
     IEnumerator DelayLoseBladder() {

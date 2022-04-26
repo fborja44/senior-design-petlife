@@ -42,13 +42,18 @@ public class DogNeedsUpdate : MonoBehaviour
     public int min = 0;
 
     private float time = 0.0f; 
-    public float period = 1f;   // 1 second period
+    public float period = 1f;       // 1 second period
+    private float alertTime = 0.0f;
+    public float alertPeriod = 30f; // 30 second period for alert messages
+
+    public bool is_rolling;
 
     
     // Start is called before the first frame update
     void Start()
     {
-
+        // Variable that indicates whether the dog is doing the rolling trick
+        is_rolling = false;
         // Hide alert
         GameObject.Find("Alert").SetActive(false);
         // Set alert text
@@ -96,16 +101,20 @@ public class DogNeedsUpdate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Alert();
         time += Time.deltaTime;
         if (time > period && !GameManager.isBusy()){
-            time = time - period;
+            time -= period;
             // Decay needs over time
             LoseEnergy(1);
             LoseHunger(1);
             LoseThirst(2);
             LoseHygiene(1);
             LoseLove(1);
+        }
+        alertTime += Time.deltaTime;
+        if (alertTime > alertPeriod && !GameManager.isBusy()) {
+            alertTime -= alertPeriod;
+            Alert();
         }
         sitBar.SetTrick(sitLevel);
         layBar.SetTrick(layLevel);
@@ -117,6 +126,12 @@ public class DogNeedsUpdate : MonoBehaviour
         rollBar.GetComponentInChildren<Text>().text = "Roll                                   " + rollLevel;
         fetchBar.GetComponentInChildren<Text>().text = "Fetch                                 " + fetchLevel;
         speakBar.GetComponentInChildren<Text>().text = "Speak                                " + speakLevel;
+
+        if (is_rolling) {
+            // Rotation pivot point is in wrong location
+            GameObject playerPet = GameManager.playerPet;
+            playerPet.transform.RotateAround(new Vector3(playerPet.transform.position.x, playerPet.transform.position.y - 0.15f, playerPet.transform.position.z), new Vector3(0,0,1), 150 * Time.deltaTime);
+        }
     }
 
     /**
@@ -450,6 +465,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseEnergy(energyUsed);
             LoseHygiene(hygieneUsed);
             StartCoroutine(SendAlert(GameManager.petName + " sat down!"));
+            StartCoroutine(playSit());
             // Debug.Log("Dog has executed Sit");
         }
     }
@@ -504,7 +520,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GameManager.isBusy()) return; // busy doing another action
 
         lastTrick = 3;
-        int rand_num = Random.Range(1,10);
+        int rand_num = Random.Range(1,1); // int rand_num = Random.Range(1,10);
         Debug.Log("Roll level is " + rollLevel + ", random number was " + rand_num);
         if (rollLevel >= rand_num) {
             Debug.Log("Dog succesfully did roll");
@@ -541,6 +557,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseEnergy(energyUsed);
             LoseHygiene(hygieneUsed);
             StartCoroutine(SendAlert(GameManager.petName + " did a roll!"));
+            StartCoroutine(playRoll());
             // Debug.Log("Dog has executed Roll");
         }
     }
@@ -839,6 +856,36 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.ToggleBusy();
     }
 
+    IEnumerator playRoll() {
+        GameManager.ToggleBusy();
+
+        GameObject playerPet = GameManager.playerPet;
+        Quaternion rotation = playerPet.transform.rotation;
+        Vector3 position = playerPet.transform.position;
+        GameManager.animator.SetFloat("speed", 0);
+
+        // Play rolling animation (done in Update method)
+        is_rolling = true;
+        yield return new WaitForSecondsRealtime((float)2.5);
+        // Stop rolling and reset rotation/position
+        is_rolling = false;
+        playerPet.transform.rotation = rotation;
+        playerPet.transform.position = position;
+
+        GameManager.ToggleBusy();
+    }
+
+    IEnumerator playSit() {
+        GameManager.ToggleBusy();
+
+        GameObject playerPet = GameManager.playerPet;
+        GameManager.animator.SetFloat("speed", 0);
+
+        yield return new WaitForSecondsRealtime((float)3);
+
+        GameManager.ToggleBusy();
+    }
+
     IEnumerator playBathe() {
         GameManager.ToggleBusy();
 
@@ -939,32 +986,34 @@ public class DogNeedsUpdate : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds(60);
             bool bonus = false;
-            if (currentBladder > max/2) {
-                GameManager.incrementScore(100);
-                bonus = true;
-            }
-            if (currentEnergy > max/2) {
-                GameManager.incrementScore(100);
-                bonus = true;
-            }
-            if (currentHunger > max/2) {
-                GameManager.incrementScore(100);
-                bonus = true;
-            }
-            if (currentHygiene > max/2) {
-                GameManager.incrementScore(200);
-                bonus = true;
-            }
-            if (currentLove > max/4) {
-                GameManager.incrementScore(200);
-                bonus = true;
-            }
-            if (currentThirst > max/2) {
-                GameManager.incrementScore(200);
-                bonus = true;
-            }
-            if (bonus) {
-                StartCoroutine(SendAlert("Awarded bonus points for taking care of " + GameManager.petName + ". Keep it up!"));
+            if (!(currentBladder == 0 || currentEnergy <= 0 || currentHunger <= 0 || currentHygiene <= 0 || currentLove <= 0 || currentThirst <= 0)) {
+                if (currentBladder > max/2) {
+                    GameManager.incrementScore(100);
+                    bonus = true;
+                }
+                if (currentEnergy > max/2) {
+                    GameManager.incrementScore(100);
+                    bonus = true;
+                }
+                if (currentHunger > max/2) {
+                    GameManager.incrementScore(100);
+                    bonus = true;
+                }
+                if (currentHygiene > max/2) {
+                    GameManager.incrementScore(200);
+                    bonus = true;
+                }
+                if (currentLove > max/4) {
+                    GameManager.incrementScore(200);
+                    bonus = true;
+                }
+                if (currentThirst > max/2) {
+                    GameManager.incrementScore(200);
+                    bonus = true;
+                }
+                if (bonus) {
+                    StartCoroutine(SendAlert("Awarded bonus points for taking care of " + GameManager.petName + ". Keep it up!"));
+                }
             }
         }
     }
@@ -998,7 +1047,7 @@ public class DogNeedsUpdate : MonoBehaviour
             }
             string name = GameManager.petName;
             if (needs[i] < max/4 && alertToggle) {
-                if (needs[i] == 0) {
+                if (needs[i] <= 0) {
                     if (name.ToLower()[name.Length - 1] == 's') {
                         StartCoroutine(SendAlert(name + "' " + need + " is empty!"));
                     } else {

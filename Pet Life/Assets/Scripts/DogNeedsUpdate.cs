@@ -48,12 +48,23 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public bool is_rolling;
 
+    public AudioSource ballBounce;
+    public AudioSource dogSnore;
+    public AudioSource dogToy;
+    public AudioSource waterSplash;
     
     // Start is called before the first frame update
     void Start()
     {
         // Variable that indicates whether the dog is doing the rolling trick
         is_rolling = false;
+
+        // Set AudioSources
+        ballBounce = GameObject.Find("Ball Bouncing Audio").GetComponent<AudioSource>();
+        dogSnore = GameObject.Find("Dog Snoring Audio").GetComponent<AudioSource>(); 
+        dogToy = GameObject.Find("Dog Toy Audio").GetComponent<AudioSource>();
+        waterSplash = GameObject.Find("Water Splash Audio").GetComponent<AudioSource>();
+
         // Hide alert
         GameObject.Find("Alert").SetActive(false);
         // Set alert text
@@ -520,7 +531,7 @@ public class DogNeedsUpdate : MonoBehaviour
         if (GameManager.isBusy()) return; // busy doing another action
 
         lastTrick = 3;
-        int rand_num = Random.Range(1,1); // int rand_num = Random.Range(1,10);
+        int rand_num = Random.Range(1,10); // int rand_num = Random.Range(1,10);
         Debug.Log("Roll level is " + rollLevel + ", random number was " + rand_num);
         if (rollLevel >= rand_num) {
             Debug.Log("Dog succesfully did roll");
@@ -607,6 +618,7 @@ public class DogNeedsUpdate : MonoBehaviour
             LoseHygiene(hygieneUsed);
             LoseThirst(thirstUsed);
             StartCoroutine(SendAlert(GameManager.petName + " played fetch!"));
+            ballBounce.Play(0);
             StartCoroutine(playJump());
             // Debug.Log("Dog has executed Fetch");
         }
@@ -714,6 +726,7 @@ public class DogNeedsUpdate : MonoBehaviour
             FailedAction("Love");
         } else {
             StartCoroutine(SendAlert("Played some fetch with " + GameManager.petName + "!"));
+            ballBounce.Play(0);
             StartCoroutine(playJump());
             LoseEnergy(energyUsed);
             LoseHunger(hungerLost);
@@ -820,7 +833,7 @@ public class DogNeedsUpdate : MonoBehaviour
         GameObject waterBowl = GameObject.Find("Water Bowl");
         Vector3 bowlPos = waterBowl.transform.position;
 
-        // Play eating animation
+        // Play drinking animation
         GameManager.animator.SetBool("is_drinking", true);
         // Move dog
         playerPet.transform.position = new Vector3(bowlPos.x + 1, bowlPos.y - (float)0.5, petPos.z);
@@ -842,6 +855,8 @@ public class DogNeedsUpdate : MonoBehaviour
         GameManager.animator.SetFloat("speed", 0);
         GameObject dogBed = GameObject.Find("Dog Bed");
         Vector3 bedPos = dogBed.transform.position;
+
+        dogSnore.Play(0);
 
         // Play sleeping animation
         GameManager.animator.SetBool("is_sleeping", true);
@@ -897,6 +912,9 @@ public class DogNeedsUpdate : MonoBehaviour
 
         // Move dog
         playerPet.transform.position = new Vector3(bathpos.x, bathpos.y + (float) 0.1, bathpos.z - 1);
+
+        waterSplash.Play(0);
+
         // Play jumping animation
         GameManager.animator.SetBool("is_jumping", true);
         yield return new WaitForSecondsRealtime((float)1);
@@ -953,6 +971,8 @@ public class DogNeedsUpdate : MonoBehaviour
 
         // Move dog
         playerPet.transform.position = new Vector3(puddlePos.x, puddlePos.y, playerPet.transform.position.z);
+
+        waterSplash.Play(0);
 
         // Play jumping animation
         GameManager.animator.SetBool("is_jumping", true);

@@ -48,10 +48,10 @@ public class DogNeedsUpdate : MonoBehaviour
 
     public bool is_rolling;
 
-    public AudioSource ballBounce;
-    public AudioSource dogSnore;
-    public AudioSource dogToy;
-    public AudioSource waterSplash;
+    private AudioSource ballBounce;
+    private AudioSource dogSnore;
+    private AudioSource dogToy;
+    private AudioSource waterSplash;
     
     // Start is called before the first frame update
     void Start()
@@ -148,7 +148,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool LoseEnergy(float energyLost){
+    public bool LoseEnergy(float energyLost){
         float newEnergy = currentEnergy - (energyLost * difficulty);
         // Check if there is enough energy
         if (newEnergy >= 0) {
@@ -165,7 +165,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool LoseHunger(float hungerLost){
+    public bool LoseHunger(float hungerLost){
         float newHunger = currentHunger - (hungerLost * difficulty);
         if (newHunger >= 0) {
             currentHunger = Mathf.Max(newHunger, 0);
@@ -181,7 +181,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool LoseThirst(float thirstLost){
+    public bool LoseThirst(float thirstLost){
         float newThirst = currentThirst - (thirstLost * difficulty);
         if (newThirst >= 0) {
             currentThirst = Mathf.Max(newThirst, 0);
@@ -197,7 +197,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool LoseLove(float loveLost){
+    public bool LoseLove(float loveLost){
         float newLove = currentLove - (loveLost * difficulty);
         if (newLove >= 0) {
             currentLove = Mathf.Max(newLove, 0);
@@ -213,7 +213,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool LoseBladder(float bladderLost){
+    public bool LoseBladder(float bladderLost){
         float newBladder = currentBladder - (bladderLost * difficulty);
         if (newBladder >= 0) {
             currentBladder = Mathf.Max(newBladder, 0);
@@ -229,7 +229,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool LoseHygiene(float hygieneLost){
+    public bool LoseHygiene(float hygieneLost){
         float newHygiene = currentHygiene - (hygieneLost * difficulty);
         if (newHygiene >= 0) {
             currentHygiene = Mathf.Max(newHygiene, 0);
@@ -245,7 +245,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainEnergy(float energyGain) {
+    public bool GainEnergy(float energyGain) {
         float newEnergy = currentEnergy + energyGain;
         if (newEnergy <= max) {
             currentEnergy = newEnergy;
@@ -265,7 +265,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainBladder(float bladderGain) {
+    public bool GainBladder(float bladderGain) {
         float newBladder = currentBladder + bladderGain;
         if (newBladder <= max) {
             currentBladder = newBladder;
@@ -285,7 +285,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainHunger(float hungerGain) {
+    public bool GainHunger(float hungerGain) {
         float newHunger = currentHunger + hungerGain;
         if (newHunger <= max) {
             currentHunger = newHunger;
@@ -306,7 +306,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainThirst(float thirstGain) {
+    public bool GainThirst(float thirstGain) {
         float newThirst = currentThirst + thirstGain;
         if (newThirst <= max) {
             currentThirst = newThirst;
@@ -326,7 +326,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainHygiene(float hygieneGain) {
+    public bool GainHygiene(float hygieneGain) {
         float newHygiene = currentHygiene + hygieneGain;
         if (newHygiene <= max) {
             currentHygiene = newHygiene;
@@ -346,7 +346,7 @@ public class DogNeedsUpdate : MonoBehaviour
     /**
      * Returns true if successful, false otherwise
      */
-    bool GainLove(float loveGain){
+    public bool GainLove(float loveGain){
         float newLove = currentLove + loveGain;
         if (newLove <= max/2) {
             currentLove = newLove;

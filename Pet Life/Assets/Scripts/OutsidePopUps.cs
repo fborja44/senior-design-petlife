@@ -10,6 +10,7 @@ public class OutsidePopUps : MonoBehaviour
     public Animator animator;
     public TMP_Text popUpText;
     public TextMeshProUGUI popupGUI;
+    public DogNeedsUpdate dogNeedsUpdate;
     
     private void Awake()
     {
@@ -17,11 +18,17 @@ public class OutsidePopUps : MonoBehaviour
         int r = rnd.Next(10);
         if (r == 1 ) // Chance that event pops up
         {
-            PopUp("Your pet jumped in some mud! You should give them a bath!");
+            PopUp(GameManager.petName + " jumped in some mud! You should give them a bath! Lost some Hygiene.");
+            float hygieneLost = (float)(DogNeedsUpdate.max * 0.4);
+            dogNeedsUpdate.LoseHygiene(hygieneLost);
         }
         if (r == 2)
         {
-            PopUp("Your pet met a friendly dog outside and played with them!");
+            PopUp(GameManager.petName + " met a friendly dog outside and played with them! Gained some Love. Lost some Energy.");
+            float loveGained = (float)(DogNeedsUpdate.max/2 * 0.2);
+            float energyLost = (float)(DogNeedsUpdate.max * 0.2);
+            dogNeedsUpdate.GainLove(loveGained);
+            dogNeedsUpdate.LoseEnergy(energyLost);
         }
     }
 

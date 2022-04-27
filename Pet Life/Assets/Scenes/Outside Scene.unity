@@ -3208,10 +3208,6 @@ MonoBehaviour:
   period: 1
   alertPeriod: 30
   is_rolling: 0
-  ballBounce: {fileID: 0}
-  dogSnore: {fileID: 0}
-  dogToy: {fileID: 0}
-  waterSplash: {fileID: 0}
 --- !u!4 &1263834128
 Transform:
   m_ObjectHideFlags: 0
@@ -5920,6 +5916,7 @@ MonoBehaviour:
   animator: {fileID: 1971916710}
   popUpText: {fileID: 2031981504}
   popupGUI: {fileID: 2031981504}
+  dogNeedsUpdate: {fileID: 1263834127}
 --- !u!1 &1911112645
 GameObject:
   m_ObjectHideFlags: 0

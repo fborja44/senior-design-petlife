@@ -10,6 +10,7 @@ public class sceneChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(1920,1080, true);
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
